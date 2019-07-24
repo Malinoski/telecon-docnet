@@ -1,0 +1,5 @@
+venv/
+__pycache__/
+.idea/
+docnetapi/core/__pycache__
+docnetapi/core/migrations/__pycache__
