@@ -1,5 +1,7 @@
 # Python web service
 
+## Developement
+
 * Install Python 3 and PyCharm CE 
 
 * Create the PyCharm web sever project, using a new environment with Python 3 interpreter (i.e.: /usr/local/Cellar/python/3.7.4/bin/python3)
@@ -34,14 +36,29 @@ python manage.py migrate
 python manage.py runserver 8001
 ```
 
-* Test some examples
+* Test 
 
-http://localhost:8001/hello/ (must deny!)
-
-To authenticate, run:
 ```
-# Get the token
+# Get token
 http post http://localhost:8001/api-token-auth/ username=admin password=admin
-# Use the token (replace $TOKEN)
+# Use the token
 http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
 ```
+
+## Deploy
+
+* From Docker Compose:
+
+```
+# Run
+docker-compose up -d
+# Test (must return a token)
+http post http://localhost:8001/api-token-auth/ username=admin password=admin
+```
+
+* To destroy the created containers and image docker
+
+```
+docker stop docnet-webserver; docker rm docnet-webserver; docker rmi docnet-webserver_web
+```
+

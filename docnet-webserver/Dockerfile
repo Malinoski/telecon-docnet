@@ -23,8 +23,10 @@ ADD . /webapps/
 
 # Create some users (https://stackoverflow.com/questions/6244382/how-to-automate-createsuperuser-on-django)
 WORKDIR /webapps/
-RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
-RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('user01', 'user01@example.com', 'user01')" | python manage.py shell
+# RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
+# RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('user01', 'user01@example.com', 'user01')" | python manage.py shell
+
+RUN python manage.py migrate
 
 # Django service
-EXPOSE 8000
+EXPOSE 8001
