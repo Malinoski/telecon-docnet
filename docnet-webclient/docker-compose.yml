@@ -1,0 +1,12 @@
+# This file is used run/config services inside the docker container
+# (such as a postgres configuration or run a web application)
+
+version: '3.3'
+
+services:
+  web:
+    build: .
+    container_name: docnet-webclient
+    command: node app.js
+    ports:
+      - "8002:8002" # HOST_PORT:CONTAINER_PORT
