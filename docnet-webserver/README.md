@@ -34,6 +34,14 @@ python manage.py migrate
 python manage.py runserver 8001
 ```
 
-* Test
+* Test some examples
 
-http://127.0.0.1:9001/hello/
+http://localhost:8001/hello/ (must deny!)
+
+To authenticate, run:
+```
+# Get the token
+http post http://localhost:8001/api-token-auth/ username=admin password=admin
+# Use the token (replace $TOKEN)
+http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
+```
