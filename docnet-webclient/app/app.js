@@ -8,16 +8,12 @@ angular.module('myApp', [
   'myApp.login',
   'myApp.version'
 ])
+.config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider) {
+	
+	$locationProvider.hashPrefix('!');
+	$routeProvider.otherwise({redirectTo: '/login'});
+	
+}])
 .controller('MainCtrl', [ '$rootScope', function($rootScope) {	
 	$rootScope.token = null;	
 }])
-.config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider, $httpProvider) {
-	
-	$httpProvider.defaults.xsrfCookieName = 'csrftoken';
-	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
-	$locationProvider.hashPrefix('!');
-	$routeProvider.otherwise({redirectTo: '/view1'});
-	
-
-	
-}]);
