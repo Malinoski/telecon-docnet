@@ -13,7 +13,7 @@ cd docnet-webserver
 docker-compose up -d 
 ```
 
-http://localhost:8001/hello
+http://localhost:8001 (username=admin, password=admin)
 
 ## Deploy the web client
 
