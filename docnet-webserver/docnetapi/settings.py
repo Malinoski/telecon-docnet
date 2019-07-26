@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     # Local Apps (Your project's apps)
     'docnetapi.core',
+    'docnetapi.networks',
 ]
 
 MIDDLEWARE = [

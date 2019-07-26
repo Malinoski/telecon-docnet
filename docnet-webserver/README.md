@@ -21,7 +21,7 @@ pip install django-cors-headers
 # Create project and apps..
 django-admin startproject [PROJECT_NAME] .
 cd [PROJECT_NAME]
-python manage.py startapp [MY_APP]
+django-admin.py startapp [MY_APP]
 
 # Create some code (settings, models, views, urls, etc..)
 # ....
