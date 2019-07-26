@@ -9,14 +9,11 @@ angular.module('myApp.login', ['ngRoute'])
   });
 }])
 
-.controller('LoginCtrl', [ '$scope', '$http', function($scope, $http) {
+.controller('LoginCtrl', [ '$rootScope', '$scope', '$http', function($rootScope, $scope, $http) {
 	
 	$scope.username = null;
 	$scope.password = null;
-	
 	$scope.login = function(){
-		
-		$scope.response = null;
 		
 		$http({
 			method: 'POST', 
@@ -26,11 +23,13 @@ angular.module('myApp.login', ['ngRoute'])
 				password: $scope.password
 			}						
 		}).then(function successCallback(response) {
-			console.log(response);
-			$scope.response = response;
+			$rootScope.token = response.data.token;			
 		}, function errorCallback(response) {
 			console.log(response);
 			$scope.response = response;
+		}).finally(function() {
+			$scope.username = null;
+			$scope.password = null;
 		});		
 	}
 }]);

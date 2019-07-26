@@ -7,12 +7,17 @@ angular.module('myApp', [
   'myApp.view2',
   'myApp.login',
   'myApp.version'
-]).
-config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider, $httpProvider) {
+])
+.controller('MainCtrl', [ '$rootScope', function($rootScope) {	
+	$rootScope.token = null;	
+}])
+.config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider, $httpProvider) {
 	
 	$httpProvider.defaults.xsrfCookieName = 'csrftoken';
 	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 	$locationProvider.hashPrefix('!');
 	$routeProvider.otherwise({redirectTo: '/view1'});
+	
+
 	
 }]);
