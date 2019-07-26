@@ -1,10 +1,14 @@
 <div class="container">
 	<div class="row">
-		<br><br>
+		<br><br>		
 	</div>
 	<div class="row">
 		<div class="col-sm"></div>
 		<div class="col-sm">
+			<div class="jumbotron" align="center">
+				<h1>DocNet</h1> 
+				<p>Welcome to your <br>Documentation Network!</p> 
+		  	</div>
 			<form>
 				<div class="form-group">
 					<input type="text" name="username" id="username" class="form-control" ng-model="username" placeholder="username" required/>
@@ -12,10 +16,10 @@
 				<div class="form-group">
 					<input type="password" name="password" id="password" class="form-control" ng-model="password" placeholder="password" required/>					
 				</div>
-				<button type="submit" class="btn btn-primary" ng-click="login()">Submit</button>
+				<button type="submit" class="btn btn-primary" ng-click="login(username,password)">Submit</button>
 			</form>
-			<br>
-			<code>{{token}}</code>			
+			<br>						
+			<div ng-show="error" class="alert alert-danger">{{error}}</div>
 		</div>
 		<div class="col-sm"></div>
 	</div>
