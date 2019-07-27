@@ -48,7 +48,7 @@ http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
 * Test from Django REST Unit Tests
 ```
 # Test all
-python manage.py test
+python manage.py test docnetapi/networks
 ```
 
 ## Deploy
@@ -58,6 +58,7 @@ python manage.py test
 ```
 # Run
 docker-compose up -d
+# Note: To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
 # Test (must return a token)
 http post http://localhost:8001/api-token-auth/ username=admin password=admin
 ```

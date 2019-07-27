@@ -1,3 +1,7 @@
+# Where should the tests live?
+# You can split your tests into different submodules such as test_models.py, test_views.py, test_forms.py, etc.
+# Feel free to pick whatever organizational scheme you like
+# (https://docs.djangoproject.com/en/2.2/topics/testing/overview/)
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
