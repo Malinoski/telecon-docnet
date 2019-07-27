@@ -36,13 +36,19 @@ python manage.py migrate
 python manage.py runserver 8001
 ```
 
-* Test 
+* Test from Command line
 
 ```
 # Get token
 http post http://localhost:8001/api-token-auth/ username=admin password=admin
 # Use the token
 http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
+```
+
+* Test from Django REST Unit Tests
+```
+# Test all
+python manage.py test
 ```
 
 ## Deploy
