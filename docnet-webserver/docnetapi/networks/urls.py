@@ -14,6 +14,8 @@ urlpatterns = [
 urlpatterns = [
     path('networks/', views.NetworkList.as_view()),
     path('networks/<int:pk>/', views.NetworkDetail.as_view()),
+    path('users/', views.UserList.as_view()),
+    path('users/<int:pk>/', views.UserDetail.as_view()),
 ]
 
 # The code below allows to set a format in the url (like: http://127.0.0.1:8000/networks.json)
