@@ -27,7 +27,7 @@ WORKDIR /webapps/
 # RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('user01', 'user01@example.com', 'user01')" | python manage.py shell
 
 RUN python manage.py migrate
-RUN python manage.py test docnetapi/networks
+# RUN python manage.py test docnetapi/networks
 
 # Django service
 EXPOSE 8001
