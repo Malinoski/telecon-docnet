@@ -20,12 +20,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')b3p=q$c0o_v9u1@p00z&c#a2uuf!x(7!#n5t9c4@qp!mksl$$'
+SECRET_KEY = 's2oqjhx4+%=khvn5xa!!jts1-yk8h6z6u4jsxb!cnpnbmptzk*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -36,15 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Third-Party Apps
-    'corsheaders',
     'rest_framework',
-    'rest_framework.authtoken',
-
-    # Local Apps (Your project's apps)
-    'docnetapi.core',
-    'docnetapi.networks',
+    'networks.apps.NetworksConfig'
 ]
 
 MIDDLEWARE = [
@@ -55,11 +49,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # Third-Party middlewares
-    'corsheaders.middleware.CorsMiddleware',  # for corsheaders
-    'django.middleware.common.CommonMiddleware',
-
 ]
 
 ROOT_URLCONF = 'docnetapi.urls'
@@ -131,13 +120,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
-CORS_ORIGIN_ALLOW_ALL=True
-
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10,
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',  # <-- And here
-    ],
-}

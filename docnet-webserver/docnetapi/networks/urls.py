@@ -1,12 +1,20 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
-# Create a router and register our viewsets with it.
-router = DefaultRouter()
-router.register(r'networks', views.NetworkViewSet)
-
-# The API URLs are now determined automatically by the router.
+'''
+# URLs for function based views
 urlpatterns = [
-    path('', include(router.urls))
+    path('networks/', views.network_list),
+    path('networks/<int:pk>/', views.network_detail),
 ]
+'''
+
+# URLs for class based views
+urlpatterns = [
+    path('networks/', views.NetworkList.as_view()),
+    path('networks/<int:pk>/', views.NetworkDetail.as_view()),
+]
+
+# The code below allows to set a format in the url (like: http://127.0.0.1:8000/networks.json)
+urlpatterns = format_suffix_patterns(urlpatterns)

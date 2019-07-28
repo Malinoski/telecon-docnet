@@ -12,6 +12,7 @@
 pip install django
 pip install djangorestframework
 pip install django-cors-headers
+pip install pygments
 
 ```
 
@@ -20,14 +21,11 @@ pip install django-cors-headers
 
 # Create project and apps..
 django-admin startproject [PROJECT_NAME] .
-cd [PROJECT_NAME]
 django-admin.py startapp [MY_APP]
 
 # Create some code (settings, models, views, urls, etc..)
 # ....
 
-# Do not forget to sync models with database for the first time, ex.: 
-python manage.py migrate
 ```
 
 * Run
