@@ -34,7 +34,15 @@ django-admin.py startapp [MY_APP]
 python manage.py runserver 8001
 ```
 
-* Test from Command line
+* Tests from command line
+
+Example 1: 
+
+```
+http -a admin:admin POST http://127.0.0.1:8001/networks/ title="New network" description="New description"
+``` 
+   
+Example 2:
 
 ```
 # Get token
@@ -42,6 +50,8 @@ http post http://localhost:8001/api-token-auth/ username=admin password=admin
 # Use the token
 http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
 ```
+
+
 
 * Test from Django REST Unit Tests
 ```
