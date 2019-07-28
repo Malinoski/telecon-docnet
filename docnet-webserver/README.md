@@ -47,11 +47,13 @@ Example 2:
 ```
 # Get token
 http post http://localhost:8001/api-token-auth/ username=admin password=admin
-# Use the token
+
+# Use the token with GET
 http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
+
+# Use the token with PUT
+curl -d "title='New Network From Commanline'&description='New description from command line'" -H 'Authorization: Token $TOKEN' -X PUT http://127.0.0.1:8001/networks/1/ 
 ```
-
-
 
 * Test from Django REST Unit Tests
 ```
