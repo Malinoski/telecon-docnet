@@ -133,11 +133,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-'''
-# WARNING, if enabled it will bug the browser login!
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
     ],
 }
-'''
+

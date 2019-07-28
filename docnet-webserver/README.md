@@ -55,8 +55,7 @@ http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
 
 * Test from Django REST Unit Tests
 ```
-# Test all
-python manage.py test docnetapi/networks
+#TODO
 ```
 
 ## Deploy

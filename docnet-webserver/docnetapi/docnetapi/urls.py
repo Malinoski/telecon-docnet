@@ -5,8 +5,14 @@ urlpatterns = [
     path('', include('networks.urls')),
 ]
 
-# Adding login to the Browsable API
 urlpatterns += [
-    path('api-auth/', include('rest_framework.urls')),
+
+    # Warning: no do use both api-auth api-token-auth, but just one!
+    # The api-auth not work well in browser (bug?)
+
+    # Adding login to the Browsable API
+    # path('api-auth/', include('rest_framework.urls')),
+
+    # Rest login
     path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]

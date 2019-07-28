@@ -10,7 +10,10 @@ angular.module('myApp', [
   'myApp.home',
   'myApp.version'
 ])
-.config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider) {
+.config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider, $httpProvider) {
+	
+	$httpProvider.defaults.xsrfCookieName = 'csrftoken';
+	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 	
 	$routeProvider
 	.when('/login', {
