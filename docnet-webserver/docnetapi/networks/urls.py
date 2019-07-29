@@ -11,11 +11,13 @@ urlpatterns = [
 '''
 
 # URLs for class based views
+# path(THE_URL_ACCESSED, THE_VIEW_USED, NICKNAME_TO_BE_USED_IN_OTHER_SERVER_POINTS),
 urlpatterns = [
-    path('networks/', views.NetworkList.as_view()),
-    path('networks/<int:pk>/', views.NetworkDetail.as_view()),
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
+    path('', views.api_root),
+    path('networks/', views.NetworkList.as_view(), name='network-list'),
+    path('networks/<int:pk>/', views.NetworkDetail.as_view(), name='network-detail'),
+    path('users/', views.UserList.as_view(), name='user-list'),
+    path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
     path('hello/', views.HelloView.as_view(), name='hello'),
 ]
 

@@ -1,9 +1,13 @@
 from django.contrib.auth.models import User
+
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.decorators import api_view
+from rest_framework.reverse import reverse
+
 from .models import Network
 from .serializers import NetworkSerializer
 from .serializers import UserSerializer
@@ -52,5 +56,14 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+
+# The view below will return to root (http://localhost:8001/) the networks and users
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+        'users': reverse('user-list', request=request, format=format),
+        'networks': reverse('network-list', request=request, format=format)
+    })
 
 
