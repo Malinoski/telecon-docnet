@@ -25,10 +25,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
 
-    # owner = serializers.ReadOnlyField(source='owner.username')
+    owner = serializers.ReadOnlyField(source='owner.username')
 
     class Meta:
         model = Address
-        # fields = ['id', 'url', 'ip', 'title', 'description', 'network', 'owner']
-        fields = ['id', 'url', 'ip', 'title', 'description', 'network']
-
+        fields = ['id', 'url', 'ip', 'title', 'description', 'network', 'owner']
