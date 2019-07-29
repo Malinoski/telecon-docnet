@@ -8,9 +8,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view
 from rest_framework.reverse import reverse
 
-from .models import Network
-from .serializers import NetworkSerializer
-from .serializers import UserSerializer
+from .models import Network, Address
+from .serializers import NetworkSerializer, UserSerializer, AddressSerializer
 from .permissions import IsOwnerOrReadOnly  # Custom permission, where any one can see, but only owner can edit
 
 
@@ -20,6 +19,17 @@ class HelloView(APIView):
     def get(self, request):
         content = {'message': 'Hello, World!'}
         return Response(content)
+
+
+# The view below will return to root (http://localhost:8001/) the networks and users
+@api_view(['GET'])
+def api_root(request, format=None):
+    return Response({
+            'users': reverse('user-list', request=request, format=format),
+            'networks': reverse('network-list', request=request, format=format),
+            'addresses': reverse('address-list', request=request, format=format)
+        }
+    )
 
 
 # Class based views
@@ -58,12 +68,17 @@ class UserDetail(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
 
-# The view below will return to root (http://localhost:8001/) the networks and users
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'networks': reverse('network-list', request=request, format=format)
-    })
+class AddressList(generics.ListCreateAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+
+    # Only authenticated users are able to create, update and delete code networks.
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 
+class AddressDetail(generics.RetrieveAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer

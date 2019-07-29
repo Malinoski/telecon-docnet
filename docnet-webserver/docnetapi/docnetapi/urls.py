@@ -11,8 +11,8 @@ urlpatterns += [
     # The api-auth not work well in browser (bug?)
 
     # Adding login to the Browsable API (remove rest_framework.authentication.TokenAuthentication' from settings!)
-    # path('api-auth/', include('rest_framework.urls')),
+    path('api-auth/', include('rest_framework.urls')),
 
     # Rest login
-    path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
+    # path('api-token-auth/', obtain_auth_token, name='api_token_auth'),
 ]

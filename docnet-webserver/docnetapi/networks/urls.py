@@ -2,23 +2,27 @@ from django.urls import path
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
+# Note:
+# path(THE_URL_ACCESSED, THE_VIEW_USED, NICKNAME_TO_BE_USED_IN_OTHER_SERVER_POINTS),
+
 '''
-# URLs for function based views
+# URLs paths for function based views
 urlpatterns = [
     path('networks/', views.network_list),
     path('networks/<int:pk>/', views.network_detail),
 ]
 '''
 
-# URLs for class based views
-# path(THE_URL_ACCESSED, THE_VIEW_USED, NICKNAME_TO_BE_USED_IN_OTHER_SERVER_POINTS),
+# URLs paths for class based views
 urlpatterns = [
     path('', views.api_root),
+    path('hello/', views.HelloView.as_view(), name='hello'),
     path('networks/', views.NetworkList.as_view(), name='network-list'),
     path('networks/<int:pk>/', views.NetworkDetail.as_view(), name='network-detail'),
     path('users/', views.UserList.as_view(), name='user-list'),
     path('users/<int:pk>/', views.UserDetail.as_view(), name='user-detail'),
-    path('hello/', views.HelloView.as_view(), name='hello'),
+    path('addresses/', views.AddressList.as_view(), name='address-list'),
+    path('addresses/<int:pk>/', views.AddressDetail.as_view(), name='address-detail'),
 ]
 
 # The code below allows to set a format in the url (like: http://127.0.0.1:8000/networks.json)
