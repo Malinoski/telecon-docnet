@@ -18,7 +18,6 @@ pip install pygments
 
 * Create the project, app, etc..
 ```
-
 # Create project and apps..
 django-admin startproject [PROJECT_NAME] .
 django-admin.py startapp [MY_APP]
@@ -26,6 +25,12 @@ django-admin.py startapp [MY_APP]
 # Create some code (settings, models, views, urls, etc..)
 # ....
 
+# Remember, if classess was created or modified, syncronize it:
+python manage.py makemigrations
+python manage.py migrate
+
+# Create the admin
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 ```
 
 * Run
@@ -45,19 +50,23 @@ http -a admin:admin POST http://127.0.0.1:8001/networks/ title="New network" des
 Example 2:
 
 ```
-# Get token
+# Get token and save in $TOKEN
 http post http://localhost:8001/api-token-auth/ username=admin password=admin
 
-# Use the token with GET
-http http://localhost:8001/hello/ 'Authorization: Token $TOKEN'
+# Create a network (POST)
+curl -d "title=New Network From Commanline&description2=New description from command line" -H "Authorization: Token $TOKEN" -X POST http://127.0.0.1:8001/networks/
 
-# Use the token with PUT
-curl -d "title='New Network From Commanline'&description='New description from command line'" -H 'Authorization: Token $TOKEN' -X PUT http://127.0.0.1:8001/networks/1/ 
+# Edit a network (PUT)
+curl -d "title=Updated the New Network From Commanline" -H "Authorization: Token $TOKEN" -X PUT http://127.0.0.1:8001/networks/1/
+
+# Add an address for the network (POST)
+curl -d "ip=10.0.0.0/31&description=Description of 10&title=Title of 10&network=http://localhost:8001/networks/1/" -H "Authorization: Token $TOKEN" -X POST http://127.0.0.1:8001/addresses/
+  
 ```
 
 * Test from Django REST Unit Tests
 ```
-#TODO
+python manage.py test
 ```
 
 ## Deploy
@@ -83,14 +92,12 @@ docker stop docnet-webserver; docker rm docnet-webserver; docker rmi docnet-webs
 * Delete database and reconfigure.
 
 ```
+
 rm -f db.sqlite3
 rm -r networks/migrations
 python manage.py makemigrations networks
 python manage.py migrate
-```
-
-* Create a user
-
-```
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('user01', 'user01@example.com', 'user01')" | python manage.py shell
+
 ```

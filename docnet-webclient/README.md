@@ -40,7 +40,9 @@ docker-compose up -d
 
 http://localhost:8002
 
-* To destroy the created containers and image docker
+## Utils
+
+* Destroy containers and image
 
 ```
 docker stop docnet-webclient; docker rm docnet-webclient; docker rmi docnet-webclient_web

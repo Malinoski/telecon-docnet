@@ -1,4 +1,5 @@
-from django.urls import path
+from django.urls import path, include
+from rest_framework import routers
 from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
@@ -13,6 +14,7 @@ urlpatterns = [
 ]
 '''
 
+'''
 # URLs paths for class based views
 urlpatterns = [
     path('', views.api_root),
@@ -24,6 +26,18 @@ urlpatterns = [
     path('addresses/', views.AddressList.as_view(), name='address-list'),
     path('addresses/<int:pk>/', views.AddressDetail.as_view(), name='address-detail'),
 ]
+'''
+
+router = routers.DefaultRouter()
+router.register('networks', views.NetworkView)
+router.register('users', views.UserView)
+router.register('addresses', views.AddressView)
+
+# URLs paths for class based views
+urlpatterns = [
+   path('', include(router.urls))
+]
+
 
 # The code below allows to set a format in the url (like: http://127.0.0.1:8000/networks.json)
-urlpatterns = format_suffix_patterns(urlpatterns)
+# urlpatterns = format_suffix_patterns(urlpatterns)

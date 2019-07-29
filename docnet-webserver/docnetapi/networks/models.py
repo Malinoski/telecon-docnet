@@ -3,23 +3,33 @@ NETWORK_TYPES = [('LAN', 'Local area network'), ('MAN', 'Metropolitan area netwo
 
 
 class Network(models.Model):
+
+    # Attributes
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
     enabled = models.BooleanField(default=True)
-    type = models.CharField(choices=NETWORK_TYPES, default='python', max_length=100)
+    type = models.CharField(choices=NETWORK_TYPES, default='', max_length=100)
+
+    # Relationship one to one (fk and pk)
     owner = models.ForeignKey('auth.User', related_name='networks', on_delete=models.CASCADE)
 
-    class Meta:
-        ordering = ['created']
+    def __str__(self):
+        return self.title
 
 
 class Address(models.Model):
+
+    # Attributes
     ip = models.CharField(max_length=100, blank=False)
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)
-    network = models.ForeignKey(Network, related_name='addresses', on_delete=models.CASCADE)
 
-    class Meta:
-        ordering = ['created']
+    owner = models.ForeignKey('auth.User', related_name='addresses', on_delete=models.CASCADE)
+
+    # Relationship one to one (one address has only one network)
+    network = models.ForeignKey(Network, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.ip
