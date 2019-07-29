@@ -74,13 +74,14 @@ http post http://localhost:8001/api-token-auth/ username=admin password=admin
 
 ## Utils
 
-* To destroy the containers and the image Docker
+* Destroy containers and image
 
 ```
 docker stop docnet-webserver; docker rm docnet-webserver; docker rmi docnet-webserver_web
 ```
 
-* To delete the database and start again.
+* Delete database and reconfigure.
+
 ```
 rm -f db.sqlite3
 rm -r networks/migrations

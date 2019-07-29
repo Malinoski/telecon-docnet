@@ -17,17 +17,20 @@ RUN pip install -U pip setuptools
 RUN pip install django
 RUN pip install djangorestframework
 RUN pip install django-cors-headers
+RUN pip install pygments
 
 # Include code in container
 ADD . /webapps/
 
+WORKDIR /webapps/docnetapi
+
 # Create some users (https://stackoverflow.com/questions/6244382/how-to-automate-createsuperuser-on-django)
-WORKDIR /webapps/
 # RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 # RUN echo "from django.contrib.auth.models import User; User.objects.create_superuser('user01', 'user01@example.com', 'user01')" | python manage.py shell
+# RUN python manage.py migrate
 
-RUN python manage.py migrate
-# RUN python manage.py test docnetapi/networks
+# Test tests
+RUN python manage.py test
 
 # Django service
 EXPOSE 8001
