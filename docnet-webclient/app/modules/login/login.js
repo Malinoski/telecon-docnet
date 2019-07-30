@@ -88,7 +88,7 @@ angular.module('myApp.login', ['ngRoute'])
             }
         };
         
-        $rootScope.postConfig = {
+        $rootScope.tokenHeaderConfig = {
         		headers: {
         			'Authorization': 'Token '+$rootScope.globals.currentUser.token
         		}

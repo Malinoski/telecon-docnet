@@ -60,7 +60,7 @@ angular.module('myApp.networks', ['ngRoute'])
     				description: $description,
     				enabled: $enabled
     	    		},
-    	    		$rootScope.postConfig
+    	    		$rootScope.tokenHeaderConfig
     	    ).then(function successCallback(response) {
     			
     			console.log("NetworksCtrl createNetwork success!");
@@ -73,13 +73,13 @@ angular.module('myApp.networks', ['ngRoute'])
     			console.log("NetworksCtrl createNetwork failed!");
     			console.log(response);
     			
-    			var createNetworkResponseMessage = "";    			
+    			var responseMessage = "";    			
     			if(response.status==401){
-    				createNetworkResponseMessage = "Unauthorized!"
+    				responseMessage = "Unauthorized!"
     			}else{
-    				createNetworkResponseMessage = "Failed to create the network!" 
+    				responseMessage = "Failed to create the network!" 
     			}
-    			bootbox.alert(createNetworkResponseMessage);
+    			bootbox.alert(responseMessage);
     			
     		}).finally(function() {
     			$('#createNetworkModal').modal('hide');
@@ -87,4 +87,41 @@ angular.module('myApp.networks', ['ngRoute'])
     		
     }
     
+    $scope.deleteNetwork = function($networkId){
+    		console.log("NetworksCtrl deleteNetwork("+$networkId+") ...");
+    		
+    		bootbox.confirm("Are you sure to delete the network?", function(result){
+    			if(result){
+    				
+    				$http.delete(
+    		    			$rootScope.webServerBaseUrl+'/networks/'+$networkId+'/',
+    		    	    		$rootScope.tokenHeaderConfig
+    		    	    ).then(function successCallback(response) {
+    		    			
+    		    			console.log("NetworksCtrl deleteNetwork success!");
+    		    			console.log(response);
+    		    			$scope.getNetworks();
+    		    			bootbox.alert("Network removed!");		
+    		    			
+    		    		}, function errorCallback(response) {
+    		    			
+    		    			console.log("NetworksCtrl deleteNetwork failed!");
+    		    			console.log(response);
+    		    			
+    		    			var responseMessage = "";    			
+    		    			if(response.status==401){
+    		    				responseMessage = "Unauthorized!"
+    		    			}else{
+    		    				responseMessage = "Failed to remove the network!" 
+    		    			}
+    		    			bootbox.alert(responseMessage);
+    		    			
+    		    		}).finally(function() {
+    		    			// If needed
+    		    		});	
+    			}
+    		});	
+    		
+    		
+    }
 }]);
