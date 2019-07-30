@@ -4,8 +4,6 @@
 angular.module('myApp', [
   'ngRoute',
   'ngCookies',
-  'myApp.view1',
-  'myApp.view2',
   'myApp.login',
   'myApp.home',
   'myApp.networks',
