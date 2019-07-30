@@ -14,7 +14,7 @@
 				<h1>Networks</h1>
 				
 				<div class="btn-group float-right" role="group">
-	                <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Create Network</button>	                
+	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createNetworkModal"><i class="fas fa-plus"></i> Create Network</button>	                
 	            </div>				
 				
 				<div ng-show="networks==0">
@@ -22,6 +22,7 @@
 				</div>
 				
 				<div ng-show="networks>0">
+				
 					<table class="table">
 						<thead>
 							<tr>
@@ -49,6 +50,47 @@
 							</tr>						
 						</tbody>
 					</table>
+
+					
+
+				</div>
+				
+				<!-- Create Network Modal -->
+				<div class="modal fade" id="createNetworkModal" tabindex="-1" role="dialog" aria-labelledby="createNetworkModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="createNetworkModalLabel">Create network</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form name="createNetworkForm" class="my-form">
+									<div class="form-group">
+										<label for="inputCidr">CIRD</label>
+										<input ng-model="inputCidr" type="text" class="form-control" id="inputCidr" aria-describedby="cidrHelp" required>
+										<small id="cidrHelp" class="form-text text-muted">Classless Inter-Domain Routing. <br>Ex.: 192.168.0.0/24, 192.168.0.0/22 and 2002:C0A8::/48</small>
+									</div>
+									<div class="form-group">
+										<label for="inputTitle">Title</label>
+										<input ng-model="inputTitle" type="text" class="form-control" id="inputTitle" required>
+									</div>
+									<div class="form-group form-check">
+										<input type="checkbox" class="form-check-input" id="inputEnabled" checked>
+										<label class="form-check-label" for="inputEnabled">Enabled</label>
+									</div>
+									<div class="form-group">
+										<label for="exampleFormControlTextarea1">Description</label>
+										<textarea class="form-control" id="inputDescription" rows="3"></textarea>
+									</div>
+									
+									<button type="submit" class="btn btn-primary" ng-disabled="!createNetworkForm.$valid" ng-click="createNetwork()">Create</button>
+								</form>
+
+							</div>							
+						</div>
+					</div>
 				</div>
 
 			</div>

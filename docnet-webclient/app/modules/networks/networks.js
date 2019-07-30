@@ -13,7 +13,7 @@ angular.module('myApp.networks', ['ngRoute'])
 .controller('NetworksCtrl', ['$rootScope', '$scope', '$http', 'AuthenticationService', function($rootScope, $scope, $http, AuthenticationService) {
 	
 	$scope.networks = null;
-	
+
 	$scope.init = function(){
 		$scope.getNetworks();
 	}
@@ -49,12 +49,15 @@ angular.module('myApp.networks', ['ngRoute'])
     */
     
     $scope.getNetworks = function(){
+    	
+    		console.log("NetworksCtrl createNetwork ...");
+    	
 		$http({
-		method: 'GET', 
-		url: $rootScope.webServerBaseUrl+'/networks/',
-		data:{
-			token: $rootScope.globals.currentUser.token
-		}						
+			method: 'GET', 
+			url: $rootScope.webServerBaseUrl+'/networks/',
+			data:{
+				token: $rootScope.globals.currentUser.token
+			}						
 		}).then(function successCallback(response) {
 			
 			console.log(response);
@@ -67,6 +70,11 @@ angular.module('myApp.networks', ['ngRoute'])
 		}).finally(function() {
 			// If needed
 		});		
+    }
+    
+    $scope.createNetwork = function(){
+    		console.log("NetworksCtrl createNetwork ...");
+    		$('#createNetworkModal').modal('hide');
     }
     
 }]);
