@@ -41,7 +41,7 @@ angular.module('myApp.login', ['ngRoute'])
     		
     		$http({
 			method: 'POST', 
-			url: $rootScope.webServerBaseUrl+'api-token-auth/',
+			url: $rootScope.webServerBaseUrl+'/api-token-auth/',
 			data:{
 				username: username,
 				password: password

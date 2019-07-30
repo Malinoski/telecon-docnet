@@ -1,4 +1,4 @@
-<div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper" ng-init="init()">
 
 	<!-- Sidebar -->
 	<div class="bg-light border-right" id="sidebar-wrapper">
@@ -35,7 +35,8 @@
       	
       	<div class="container-fluid">		
 			
-			<p>Here I am!</p>
+			<p>Networks:</p>
+			<code>{{networks}}</code>		
 			
 			<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

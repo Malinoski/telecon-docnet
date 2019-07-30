@@ -15,8 +15,6 @@ angular.module('myApp', [
 	$httpProvider.defaults.xsrfCookieName = 'csrftoken';
 	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 	
-	
-	
 	$routeProvider
 	.when('/login', {
 		controller : 'LoginController',
@@ -34,5 +32,6 @@ angular.module('myApp', [
 	
 }])
 .run(function($rootScope) {
-	$rootScope.webServerBaseUrl = 'http://127.0.0.1:8001/';
+	 $rootScope.webServerBaseUrl = 'http://127.0.0.1:8001';
+	 $rootScope.authenticationMode = 'loginAndPass'; // 'loginAndPass' or 'token'
 });
