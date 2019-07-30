@@ -1,5 +1,9 @@
 # Python web service
 
+## TODO
+
+* Create network type as a class, related with network
+
 ## Developement
 
 * Install Python 3 and PyCharm CE 
