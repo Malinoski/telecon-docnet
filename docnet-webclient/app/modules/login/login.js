@@ -33,7 +33,7 @@ angular.module('myApp.login', ['ngRoute'])
 	}
 	
 }])
-.factory("AuthenticationService", function($http, $cookieStore, $rootScope, $timeout) {
+.factory("AuthenticationService", function($http, $cookieStore, $rootScope, $timeout, $location) {
 
     //  Function defined for when the user login is initiate
     var Login = function (username, password, callback) {
@@ -100,15 +100,18 @@ angular.module('myApp.login', ['ngRoute'])
 
     //  Clears the cookie and the state for the application to recognise a logged out state
     var ClearCredentials = function () {
+    	
+    		console.log("AuthenticationService ClearCredentials ...");
+    		
         $rootScope.globals = {};
         $cookieStore.remove('globals');
         $http.defaults.headers.common.Authorization = 'Basic ';
     };
-
-	return {
+    
+    return {
 		Login: Login,
 		SetCredentials: SetCredentials,
-		ClearCredentials: ClearCredentials
+		ClearCredentials: ClearCredentials		
 	};
 
 })
