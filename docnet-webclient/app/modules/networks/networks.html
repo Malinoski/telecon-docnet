@@ -17,31 +17,39 @@
 	                <button type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Create Network</button>	                
 	            </div>				
 				
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">Id</th>
-							<th scope="col">Title</th>
-							<th scope="col">Description</th>
-							<th scope="col">Type</th>
-							<th scope="col">Owner</th>
-							<th scope="col">Action</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="network in networks">
-							<th scope="row">{{network.id}}</th>
-							<td>{{network.title}}</td>
-							<td>{{network.description}}</td>
-							<td>{{network.owner}}</td>
-							<td>{{network.type}}</td>
-							<td>
-								<a href=""><i class="fas fa-edit"></i></a>
-								<a href=""><i class='far fa-trash-alt'></i></a>								
-							</td>
-						</tr>						
-					</tbody>
-				</table>
+				<div ng-show="networks==0">
+					<i><p>There are no records</p></i>
+				</div>
+				
+				<div ng-show="networks>0">
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">Id</th>
+								<th scope="col">Title</th>
+								<th scope="col">Url</th>
+								<th scope="col">Description</th>
+								<th scope="col">Type</th>
+								<th scope="col">Owner</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="network in networks" ng-click="showClient(client)">
+								<th scope="row">{{network.id}}</th>
+								<td>{{network.title}}</td>
+								<td>{{network.url}}</td>
+								<td>{{network.description}}</td>
+								<td>{{network.owner}}</td>
+								<td>{{network.type}}</td>
+								<td>
+									<a href=""><i class="fas fa-edit"></i></a>
+									<a href=""><i class='far fa-trash-alt'></i></a>								
+								</td>
+							</tr>						
+						</tbody>
+					</table>
+				</div>
 
 			</div>
 			
