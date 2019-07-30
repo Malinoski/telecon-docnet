@@ -31,20 +31,20 @@
 								<th scope="col">Title</th>
 								<th scope="col">Url</th>
 								<th scope="col">Description</th>
-								<th scope="col">Type</th>
 								<th scope="col">Owner</th>
+								<th scope="col">Enabled</th>
 								<th scope="col">Action</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr ng-repeat="network in networks" ng-click="showClient(client)">
-								<th scope="row">{{network.id}}</th>
+								<td scope="row">{{network.id}}</td>
 								<td>{{network.cidr}}</td>
 								<td>{{network.title}}</td>
 								<td>{{network.url}}</td>
 								<td>{{network.description}}</td>
 								<td>{{network.owner}}</td>
-								<td>{{network.type}}</td>
+								<td>{{network.enabled}}</td>
 								<td>
 									<a href="" data-toggle="modal" data-target="#updateNetworkModal" ng-click="loadUpdateNetworkModal(network)"><i class="fas fa-edit"></i></a>
 									<a href="" ng-click="deleteNetwork(network.id)"><i class='far fa-trash-alt'></i></a>								
@@ -85,7 +85,7 @@
 										<textarea class="form-control" id="inputDescription" rows="3"></textarea>
 									</div>
 									
-									<button type="submit" class="btn btn-primary" ng-disabled="!createNetworkForm.$valid" ng-click="createNetwork(inputCidr, inputTitle, inputEnabled, inputDescription)">Create</button>
+									<button type="submit" class="btn btn-primary" ng-disabled="!createNetworkForm.$valid" ng-click="createNetwork(inputCidr, inputTitle, inputDescription, inputEnabled)">Create</button>
 								</form>
 
 							</div>							

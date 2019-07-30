@@ -54,8 +54,8 @@ angular.module('myApp.networks', ['ngRoute'])
     /** REST request */
     $scope.createNetwork = function($cidr, $title, $description, $enabled){
     	
-    		console.log("NetworksCtrl createNetwork ...");
-    		console.log($rootScope.globals.tokenHeaderConfig);
+    		console.log("NetworksCtrl createNetwork ("+$cidr+", "+$title+", "+$description+", "+$enabled+") ...");
+    		
     		$http.post(
     			$rootScope.webServerBaseUrl+'/networks/', 
     	    		{
