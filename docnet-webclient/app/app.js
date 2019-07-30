@@ -8,6 +8,7 @@ angular.module('myApp', [
   'myApp.view2',
   'myApp.login',
   'myApp.home',
+  'myApp.networks',
   'myApp.version'
 ])
 .config(['$locationProvider', '$routeProvider', '$httpProvider', function($locationProvider, $routeProvider, $httpProvider) {
@@ -25,6 +26,10 @@ angular.module('myApp', [
 	.when('/', {
 		controller : 'HomeCtrl',
 		templateUrl : 'modules/home/home.html'
+	})
+	.when('/networks', {
+		controller : 'NetworksCtrl',
+		templateUrl : 'modules/networks/networks.html'
 	})
 	.otherwise({
 		redirectTo : '/login'

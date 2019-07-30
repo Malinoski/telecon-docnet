@@ -1,4 +1,4 @@
-<div class="d-flex" id="wrapper" ng-init="init()">
+<div class="d-flex" id="wrapper">
 
 	<div ng-include="'modules/home/sidebar.html'"></div>
 	
@@ -7,9 +7,13 @@
 	
 		<div ng-include="'modules/home/topbar.html'"></div>
 	
-		<div class="container-fluid">		
+		<div class="container-fluid">
 			
-			<p>Wellcome</p>
+			<div ng-init="init()">		
+				Networks: 
+				<p>{{networks}}</p>
+				
+			</div>
 			
 			<!--[if lt IE 7]>
 			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>

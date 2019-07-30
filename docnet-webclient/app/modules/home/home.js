@@ -12,61 +12,6 @@ angular.module('myApp.home', ['ngRoute'])
 }])
 .controller('HomeCtrl', ['$rootScope', '$scope', '$http', 'AuthenticationService', function($rootScope, $scope, $http, AuthenticationService) {
 	
-	$scope.networks = null;
+	console.log("Start HomeCtrl ...");
 	
-	$scope.init = function(){
-		$scope.getNetworks();
-	}
-    
-	$scope.logout = function(){
-		AuthenticationService.ClearCredentials();
-    }
-    
-    console.log($rootScope);
-    
-    /* Example using username and pass
-    $scope.getNetworks = function(){
-    		$http({
-			method: 'GET', 
-			url: $rootScope.webServerBaseUrl+'/networks/',
-			data:{
-				username: $rootScope.globals.username,
-				password: $rootScope.globals.password
-			}						
-		}).then(function successCallback(response) {
-			
-			console.log(response);
-			$scope.networks = response.data.results;
-			
-		}, function errorCallback(response) {
-			
-			console.log(response);			
-			
-		}).finally(function() {
-			// If needed
-		});		
-    }
-    */
-    
-    $scope.getNetworks = function(){
-		$http({
-		method: 'GET', 
-		url: $rootScope.webServerBaseUrl+'/networks/',
-		data:{
-			token: $rootScope.globals.currentUser.token
-		}						
-	}).then(function successCallback(response) {
-		
-		console.log(response);
-		$scope.networks = response.data.results		
-		
-	}, function errorCallback(response) {
-		
-		console.log(response);			
-		
-	}).finally(function() {
-		// If needed
-	});		
-}
-    
 }]);
