@@ -11,7 +11,7 @@ angular.module('myApp.login', ['ngRoute'])
 }])
 .controller('LoginCtrl', [ '$rootScope', '$scope', '$http', '$location', 'AuthenticationService', function($rootScope, $scope, $http, $location, AuthenticationService) {
 	
-	AuthenticationService.ClearCredentials();
+	// AuthenticationService.ClearCredentials();
 	
 	$scope.login = function (username, password) {
 		
@@ -35,6 +35,8 @@ angular.module('myApp.login', ['ngRoute'])
 }])
 .factory("AuthenticationService", function($http, $cookieStore, $rootScope, $timeout, $location) {
 
+	console.log("AuthenticationService factory");
+	
     //  Function defined for when the user login is initiate
     var Login = function (username, password, callback) {
     	
@@ -79,18 +81,20 @@ angular.module('myApp.login', ['ngRoute'])
 
     //  Sets the cookie and the state to logged in
     var SetCredentials = function (username, token) {
+    	
+    		console.log("AuthenticationService SetCredentials ...");
+    	
         var authdata = username + ':' + token;
         $rootScope.globals = {
             currentUser: {
                 username: username,
                 authdata: authdata,
                 token:token
-            }
-        };
-        
-        $rootScope.tokenHeaderConfig = {
-        		headers: {
-        			'Authorization': 'Token '+$rootScope.globals.currentUser.token
+            },
+            tokenHeaderConfig: {
+        			headers: {
+        				'Authorization': 'Token '+token
+        			}
         		}
         };
 

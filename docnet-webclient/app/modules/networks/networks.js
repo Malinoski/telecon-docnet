@@ -10,7 +10,7 @@ angular.module('myApp.networks', ['ngRoute'])
 	});
 	
 }])
-.controller('NetworksCtrl', ['$rootScope', '$scope', '$http', '$location', 'AuthenticationService', function($rootScope, $scope, $http, $location, AuthenticationService) {
+.controller('NetworksCtrl', ['$rootScope', '$scope', '$http', '$location', '$cookieStore', 'AuthenticationService', function($rootScope, $scope, $http, $location, $cookieStore, AuthenticationService) {
 	
 	console.log("NetworksCtrl start ...");
 	
@@ -55,7 +55,7 @@ angular.module('myApp.networks', ['ngRoute'])
     $scope.createNetwork = function($cidr, $title, $description, $enabled){
     	
     		console.log("NetworksCtrl createNetwork ...");
-    		
+    		console.log($rootScope.globals.tokenHeaderConfig);
     		$http.post(
     			$rootScope.webServerBaseUrl+'/networks/', 
     	    		{
@@ -64,7 +64,7 @@ angular.module('myApp.networks', ['ngRoute'])
     				description: $description,
     				enabled: $enabled
     	    		},
-    	    		$rootScope.tokenHeaderConfig
+    	    		$rootScope.globals.tokenHeaderConfig
     	    ).then(function successCallback(response) {
     			
     			console.log("NetworksCtrl createNetwork success!");
@@ -117,7 +117,7 @@ angular.module('myApp.networks', ['ngRoute'])
 				description: $networkToUpdate.description,
 				enabled: $networkToUpdate.enabled
 	    		},
-	    		$rootScope.tokenHeaderConfig
+	    		$rootScope.globals.tokenHeaderConfig
 	    ).then(function successCallback(response) {
 			
 			console.log("NetworksCtrl updateNetwork success!");
@@ -146,12 +146,21 @@ angular.module('myApp.networks', ['ngRoute'])
     $scope.deleteNetwork = function($networkId){
     		console.log("NetworksCtrl deleteNetwork("+$networkId+") ...");
     		
+    		
+//    		console.log($rootScope.globals);
+//    		console.log($cookieStore);
+//    		console.log($http.defaults.headers);
+//    		console.log("tokenHeaderConfig:");
+//    		console.log($rootScope.tokenHeaderConfig);
+    		console.log("globals:");
+    		console.log($rootScope.globals);
+    		
     		bootbox.confirm("Are you sure to delete the network?", function(result){
     			if(result){
     				
     				$http.delete(
     		    			$rootScope.webServerBaseUrl+'/networks/'+$networkId+'/',
-    		    	    		$rootScope.tokenHeaderConfig
+    		    			$rootScope.globals.tokenHeaderConfig
     		    	    ).then(function successCallback(response) {
     		    			
     		    			console.log("NetworksCtrl deleteNetwork success!");
@@ -185,7 +194,7 @@ angular.module('myApp.networks', ['ngRoute'])
 		
 		$http.post(
 			$rootScope.webServerBaseUrl+'/',
-	    		$rootScope.tokenHeaderConfig
+			$rootScope.globals.tokenHeaderConfig
 	    ).then(function successCallback(response) {
 			
 	    		console.log("NetworksCtrl checkToken is valid");
