@@ -107,46 +107,24 @@
 								<form name="updateNetworkForm" class="my-form">
 									<div class="form-group">
 										<label for="inputCidr">CIRD</label>
-										<input 
-											id="updateInputCidr" name="updateInputCidr" ng-model="updateInputCidr" ng-value="networkToUpdate.cidr" type="text" class="form-control" aria-describedby="cidrHelp" required>
+										<input id="updateInputCidr" name="updateInputCidr" ng-model="networkToUpdate.cidr" ng-value="networkToUpdate.cidr" type="text" class="form-control" aria-describedby="cidrHelp" required>
 										<small id="cidrHelp" class="form-text text-muted">{{cidrNote}}</small>
 									</div>
 									<div class="form-group">
 										<label for="updateInputTitle">Title</label>
-										<input 
-											id="updateInputTitle"
-											name="updateInputTitle" 
-											ng-model="updateInputTitle"
-											ng-value="networkToUpdate.title" 
-											type="text" 
-											class="form-control" 
-											required>
+										<input id="updateInputTitle" name="updateInputTitle" ng-model="networkToUpdate.title" ng-value="networkToUpdate.title" type="text"  class="form-control" required>
 									</div>
 									<div class="form-group form-check">
-										<input 
-											id="updateInputEnabled"
-											name="updateInputEnabled" 
-											ng-model="updateInputEnabled" 
-											ng-value="networkToUpdate.enabled"
-											type="checkbox" 
-											class="form-check-input" 
-											checked>
+										<input id="updateInputEnabled" name="updateInputEnabled" ng-model="networkToUpdate.enabled" ng-value="networkToUpdate.enabled" type="checkbox" class="form-check-input" checked>
 										<label class="form-check-label" for="updateInputEnabled">Enabled</label>
 									</div>
 									<div class="form-group">
 										<label ng-model="updateInputDescription" for="updateInputDescription">Description</label>
-										<textarea 
-										id="updateInputDescription"
-										name="updateInputDescription" 
-										ng-model="updateInputDescription" 
-										ng-value="networkToUpdate.description"
-										class="form-control" 
-										rows="3" 
-										></textarea>
+										<textarea id="updateInputDescription" name="updateInputDescription" ng-model="networkToUpdate.description" ng-value="networkToUpdate.description" class="form-control" rows="3"></textarea>
 									</div>
 									
 									<!-- !updateNetworkForm.$valid -->
-									<button type="submit" class="btn btn-primary" ng-disabled="updateNetworkForm.$pristine" ng-click="updateNetwork(inputCidr, inputTitle, inputEnabled, inputDescription)">Update</button>
+									<button type="submit" class="btn btn-primary" ng-disabled="updateNetworkForm.$pristine" ng-click="updateNetwork(networkToUpdate)">Update</button>
 								</form>
 
 							</div>							
