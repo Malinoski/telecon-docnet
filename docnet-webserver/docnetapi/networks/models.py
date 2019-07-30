@@ -4,7 +4,9 @@ NETWORK_TYPES = [('LAN', 'Local area network'), ('MAN', 'Metropolitan area netwo
 
 class Network(models.Model):
 
-    # Attributes
+    # Classless Inter-Domain Routing. Ex.: "192.168.0.0 /24", "192.168.0.0 /22", "2002:C0A8::/48"
+    cidr = models.CharField(max_length=100, blank=False)
+
     title = models.CharField(max_length=100, blank=False)
     description = models.TextField(blank=True, default='')
     created = models.DateTimeField(auto_now_add=True)

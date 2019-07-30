@@ -10,7 +10,7 @@ class NetworkSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Network
-        fields = ['url', 'id', 'title', 'description', 'enabled', 'type', 'owner']
+        fields = ['url', 'id', 'title', 'cidr', 'description', 'enabled', 'type', 'owner']
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
