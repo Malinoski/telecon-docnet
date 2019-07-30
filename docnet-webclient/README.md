@@ -4,6 +4,8 @@
 
 * Create an service to logout, where can be used by all apps
 
+* Create unit tests, like the samples located in e2e-testes folder
+
 ## Development
 
 * Get an Angular template code
