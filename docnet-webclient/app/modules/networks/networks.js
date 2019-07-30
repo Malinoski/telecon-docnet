@@ -16,6 +16,9 @@ angular.module('myApp.networks', ['ngRoute'])
 	
 	$http.defaults.headers.common.Authorization = 'Authorization: Token ' + $rootScope.globals.currentUser.token;
 	$scope.networks = null;
+	$scope.networkToUpdate = null;
+	$scope.disableSendUpdateNetworkForm = true;
+	$scope.cidrNote = "Classless Inter-Domain Routing (i.e.: 192.168.0.0/24, 192.168.0.0/22, 2002:C0A8::/48, etc.)";
 
 	$scope.init = function(){
 		$scope.getNetworks();
@@ -50,7 +53,7 @@ angular.module('myApp.networks', ['ngRoute'])
     $scope.createNetwork = function($cidr, $title, $description, $enabled){
     	
     		console.log("NetworksCtrl createNetwork ...");
-    		console.log($http.defaults.headers.common.Authorization);
+    		console.log($rootScope.tokenHeaderConfig);
     		
     		$http.post(
     			$rootScope.webServerBaseUrl+'/networks/', 
@@ -84,6 +87,26 @@ angular.module('myApp.networks', ['ngRoute'])
     			$('#createNetworkModal').modal('hide');
     		});	
     		
+    }
+    
+    // Used to fill the modal for update network 
+    $scope.loadUpdateNetworkModal = function(network){
+    		$scope.updateNetworkForm.$setPristine()
+    		$scope.networkToUpdate = network;
+    }
+    
+    $scope.disableSendUpdateNetworkButton = function(updateInputCidr, updateInputTitle, networkToUpdate){
+    		console.log(updateInputCidr+" "+ updateInputTitle +" "+  networkToUpdate);
+    		if((networkToUpdate.cidr!=updateInputCidr) || (networkToUpdate.title!=updateInputTitle)) {
+    			return false;
+    		}else{
+    			return true;
+    		}
+    		console.log("validateNetworkToUpdate");
+    }
+    
+    $scope.updateNetwork = function($cidr, $title, $description, $enabled){
+    		console.log("NetworksCtrl updateNetwork TODO ...");
     }
     
     $scope.deleteNetwork = function($networkId){
