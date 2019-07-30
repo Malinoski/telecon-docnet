@@ -43,38 +43,37 @@ angular.module('myApp.login', ['ngRoute'])
     			token: null    			
     		};
     		
-    		$http({
-			method: 'POST', 
-			url: $rootScope.webServerBaseUrl+'/api-token-auth/',
-			data:{
-				username: username,
-				password: password
-			}						
-		}).then(function successCallback(response) {
-			
-			console.log("AuthenticationService Login success!");
-			// console.log(response);
-			
-			loginResponse.success = true;
-			loginResponse.token = response.data.token;
-			callback(loginResponse);
-			
-		}, function errorCallback(response) {
-			
-			console.log("AuthenticationService Login failed!");
-			console.log(response);
-			
-			if(response.status === 400){
-				loginResponse.message = 'Username or password is incorrect, try "admin" and "admin" =)';
-			} else {
-				loginResponse.message = 'Some problem occurred in REST Web Server =(';
-			} 		
-			
-			callback(loginResponse);
-			
-		}).finally(function() {
-			// If needed
-		});		
+    		$http.post(
+    			$rootScope.webServerBaseUrl+'/api-token-auth/', 
+    			{
+    				username: username,
+    				password: password
+    			}	
+    		).then(function successCallback(response) {
+    			
+    			console.log("AuthenticationService Login success!");
+    			// console.log(response);
+    			
+    			loginResponse.success = true;
+    			loginResponse.token = response.data.token;
+    			callback(loginResponse);
+    			
+    		}, function errorCallback(response) {
+    			
+    			console.log("AuthenticationService Login failed!");
+    			console.log(response);
+    			
+    			if(response.status === 400){
+    				loginResponse.message = 'Username or password is incorrect, try "admin" and "admin" =)';
+    			} else {
+    				loginResponse.message = 'Some problem occurred in REST Web Server =(';
+    			} 		
+    			
+    			callback(loginResponse);
+    			
+    		}).finally(function() {    			
+    			// If needed
+    		});
         
     };
 
