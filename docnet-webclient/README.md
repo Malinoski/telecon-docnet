@@ -2,11 +2,13 @@
 
 ## TODO
 
-* [backend] Create an service to logout, where can be used by all apps
+* [feature] Create an service to logout, where can be used by all apps
 
 * [tests] Create unit tests, like the samples located in e2e-testes folder
 
 * [Design] Create a principal header on top of page
+
+
 
 ## Development
 
