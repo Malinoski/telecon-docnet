@@ -4,32 +4,23 @@
 
 * [feature] Create an service to logout, where can be used by all apps
 
+* [feature] Create a service where can check all http response and alert adequally (a pattern to all). Ex.: If response.status==401, then, "Unauthorized"
+
 * [tests] Create unit tests, like the samples located in e2e-testes folder
 
 * [Design] Create a principal header on top of page
 
-
-
 ## Development
 
-* Get an Angular template code
+* Run a simple Angular in node.js
 
 ```
 git clone --depth=1 https://github.com/angular/angular-seed.git docnet-webclient
-```
-
-* Run using node.js
-
-```
 cd docnet-webclient
 npm install
 npm install express --save
-node app.js
+node app.js # here are configured the http port used
 ```
-
-* Test 
-
-http://localhost:8002
 
 ## Deploy 
 

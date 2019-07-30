@@ -17,11 +17,11 @@
 	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createNetworkModal"><i class="fas fa-plus"></i> Create Network</button>	                
 	            </div>				
 				
-				<div ng-show="networks==0">
+				<div ng-show="networks.length==0">
 					<i><p>There are no records</p></i>
 				</div>
 				
-				<div ng-show="networks>0">
+				<div ng-show="networks.length>0">
 				
 					<table class="table">
 						<thead>
@@ -49,9 +49,7 @@
 								</td>
 							</tr>						
 						</tbody>
-					</table>
-
-					
+					</table>					
 
 				</div>
 				
@@ -77,15 +75,15 @@
 										<input ng-model="inputTitle" type="text" class="form-control" id="inputTitle" required>
 									</div>
 									<div class="form-group form-check">
-										<input type="checkbox" class="form-check-input" id="inputEnabled" checked>
+										<input ng-model="inputEnabled" type="checkbox" class="form-check-input" id="inputEnabled" checked>
 										<label class="form-check-label" for="inputEnabled">Enabled</label>
 									</div>
 									<div class="form-group">
-										<label for="exampleFormControlTextarea1">Description</label>
+										<label ng-model="inputDescription" for="inputDescription">Description</label>
 										<textarea class="form-control" id="inputDescription" rows="3"></textarea>
 									</div>
 									
-									<button type="submit" class="btn btn-primary" ng-disabled="!createNetworkForm.$valid" ng-click="createNetwork()">Create</button>
+									<button type="submit" class="btn btn-primary" ng-disabled="!createNetworkForm.$valid" ng-click="createNetwork(inputCidr, inputTitle, inputEnabled, inputDescription)">Create</button>
 								</form>
 
 							</div>							

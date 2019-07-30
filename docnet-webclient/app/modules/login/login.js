@@ -52,12 +52,16 @@ angular.module('myApp.login', ['ngRoute'])
 			}						
 		}).then(function successCallback(response) {
 			
+			console.log("AuthenticationService Login success!");
+			// console.log(response);
+			
 			loginResponse.success = true;
 			loginResponse.token = response.data.token;
 			callback(loginResponse);
 			
 		}, function errorCallback(response) {
 			
+			console.log("AuthenticationService Login failed!");
 			console.log(response);
 			
 			if(response.status === 400){
@@ -83,6 +87,12 @@ angular.module('myApp.login', ['ngRoute'])
                 authdata: authdata,
                 token:token
             }
+        };
+        
+        $rootScope.postConfig = {
+        		headers: {
+        			'Authorization': 'Token '+$rootScope.globals.currentUser.token
+        		}
         };
 
         $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; 
