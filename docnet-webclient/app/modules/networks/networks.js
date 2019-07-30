@@ -31,7 +31,7 @@ angular.module('myApp.networks', ['ngRoute'])
 	/** REST request */
     $scope.getNetworks = function(){
     	
-		console.log("NetworksCtrl createNetwork ...");
+		console.log("NetworksCtrl getNetworks ...");
 	
 		$http.get(
 			$rootScope.webServerBaseUrl+'/networks/'										

@@ -20,7 +20,7 @@ angular.module('myApp.login', ['ngRoute'])
             if(response.success) {
                 // AuthenticationService.SetCredentials(username, password);
             		AuthenticationService.SetCredentials(username, response.token);
-            		$location.path('/');
+            		$location.path('/networks');
             } else {
                 $scope.error = response.message;
                 $scope.dataLoading = false;
