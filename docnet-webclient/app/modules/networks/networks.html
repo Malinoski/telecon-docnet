@@ -10,9 +10,31 @@
 		<div class="container-fluid">
 			
 			<div ng-init="init()">		
-				Networks: 
-				<p>{{networks}}</p>
+				 
+				<h1>Networks</h1>
 				
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">Id</th>
+							<th scope="col">Title</th>
+							<th scope="col">Description</th>
+							<th scope="col">Type</th>
+							<th scope="col">Owner</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="network in networks">
+							<th scope="row">network.id</th>
+							<td>{{network.title}}</td>
+							<td>{{network.description}}</td>
+							<td>{{network.owner}}</td>
+							<td>{{network.type}}</td>
+						</tr>						
+					</tbody>
+				</table>
+
 			</div>
 			
 			<!--[if lt IE 7]>
