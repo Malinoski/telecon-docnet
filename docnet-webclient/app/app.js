@@ -32,6 +32,5 @@ angular.module('myApp', [
 	
 }])
 .run(function($rootScope) {
-	 $rootScope.webServerBaseUrl = 'http://127.0.0.1:8001';
-	 $rootScope.authenticationMode = 'loginAndPass'; // 'loginAndPass' or 'token'
+	 $rootScope.webServerBaseUrl = 'http://127.0.0.1:8001';	 
 });

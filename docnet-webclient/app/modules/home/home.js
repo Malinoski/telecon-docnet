@@ -15,7 +15,7 @@ angular.module('myApp.home', ['ngRoute'])
 	$scope.networks = null;
 	
 	$scope.init = function(){
-		$scope.getNetworksToken();
+		$scope.getNetworks();
 	}
     
 	$scope.logout = function(){
@@ -53,7 +53,7 @@ angular.module('myApp.home', ['ngRoute'])
 		method: 'GET', 
 		url: $rootScope.webServerBaseUrl+'/networks/',
 		data:{
-			token: $rootScope.globals.currentUser
+			token: $rootScope.globals.currentUser.token
 		}						
 	}).then(function successCallback(response) {
 		
