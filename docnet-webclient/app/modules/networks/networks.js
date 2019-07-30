@@ -20,8 +20,8 @@ angular.module('myApp.networks', ['ngRoute'])
     
 	$scope.logout = function(){
 		AuthenticationService.ClearCredentials();
-    }
-    
+	}
+	
     console.log("NetworksCtrl start ...");
     
     /* Example using username and pass

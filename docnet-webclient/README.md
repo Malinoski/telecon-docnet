@@ -1,5 +1,9 @@
 # Angular web client
 
+## TODO
+
+* Create an service to logout, where can be used by all apps
+
 ## Development
 
 * Get an Angular template code

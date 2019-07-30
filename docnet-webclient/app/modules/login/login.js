@@ -27,6 +27,10 @@ angular.module('myApp.login', ['ngRoute'])
             }
         });
     };
+    
+    $rootScope.logout = function(){
+		AuthenticationService.ClearCredentials();
+	}
 	
 }])
 .factory("AuthenticationService", function($http, $cookieStore, $rootScope, $timeout) {

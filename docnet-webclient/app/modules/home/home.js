@@ -14,4 +14,8 @@ angular.module('myApp.home', ['ngRoute'])
 	
 	console.log("Start HomeCtrl ...");
 	
+	$scope.logout = function(){
+		AuthenticationService.ClearCredentials();
+	}
+	
 }]);
