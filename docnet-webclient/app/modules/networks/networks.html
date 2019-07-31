@@ -9,9 +9,12 @@
 	
 		<div class="container-fluid">
 			
-			<div ng-init="init()">		
-				 
-				<h1>Networks</h1>
+			<div ng-init="init()">	
+				
+				<h1>Network List</h1>
+				<!-- This is used to fit space with the address page -->
+				<h4>&nbsp;</h4>
+				<h4>&nbsp;</h4>
 				
 				<div class="btn-group float-right" role="group">
 	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createNetworkModal"><i class="fas fa-plus"></i> Create Network</button>	                
@@ -21,9 +24,11 @@
 					<i><p>There are no records</p></i>
 				</div>
 				
+				<!-- View Table -->
+				<br>
 				<div ng-show="networks.length>0">
-				
-					<table class="table">
+					<br>
+					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th scope="col">Id</th>
@@ -36,21 +41,20 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="network in networks">
+							<tr ng-repeat="network in networks" class="accordion-toggle">
 								<td scope="row">{{network.id}}</td>
-								<td>{{network.cidr}}</td>
+								<td><a href="" ng-click="networkDetail(network)">{{network.cidr}}</a></td>
 								<td>{{network.title}}</td>
 								<td>{{network.description}}</td>
 								<td>{{network.owner}}</td>
 								<td>{{network.enabled}}</td>
 								<td>
 									<a href="" data-toggle="modal" data-target="#updateNetworkModal" ng-click="loadUpdateNetworkModal(network)"><i class="fas fa-edit"></i></a>
-									<a href="" ng-click="deleteNetwork(network)"><i class='far fa-trash-alt'></i></a>								
+									<a href="" ng-click="deleteNetwork(network)"><i class='far fa-trash-alt'></i></a>						
 								</td>
 							</tr>						
 						</tbody>
-					</table>					
-
+					</table>
 				</div>
 				
 				<!-- Create Network Modal -->

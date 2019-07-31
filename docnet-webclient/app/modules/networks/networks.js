@@ -19,7 +19,7 @@ angular.module('myApp.networks', ['ngRoute'])
 	$scope.networkToUpdate = null;
 	$scope.disableSendUpdateNetworkForm = true;
 	$scope.cidrNote = "Classless Inter-Domain Routing (i.e.: 192.168.0.0/24, 192.168.0.0/22, 2002:C0A8::/48, etc.)";
-
+	
 	$scope.init = function(){
 		$scope.getNetworks();
 	}
@@ -178,6 +178,11 @@ angular.module('myApp.networks', ['ngRoute'])
     		    		});	
     			}
     		});    		
+    }
+    
+    $scope.networkDetail = function($network){
+    		console.log("NetworksCtrl networkDetail ... ");    		
+    		$location.path('/addresses/'+$network.id);		
     }
     
 }]);

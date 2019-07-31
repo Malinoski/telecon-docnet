@@ -11,60 +11,40 @@
 			
 			<div ng-init="init()">		
 				 
-				<h1>Addresses</h1>
+				<h1>Network</h1>
+				<h4><i>Title: {{network.title}}</i></h4>
+				<h4><i>CIDR: {{network.cidr}}</i></h4>
 				
 				<div class="btn-group float-right" role="group">
 	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAddressModal" ng-click="loadCreateAddressModal()"><i class="fas fa-plus"></i> Create Address</button>	                
 	            </div>
 				
+				<br><br><br>
 	            <div ng-show="addresses.length==0">
 					<p><i>There are no records</i></p>
 				</div>
 				
+				<br>
 				<div ng-show="addresses.length>0">
-
-					<!-- Filter -->
-					<br>
-					<form>
-						<div class="row">
-							<div class="col">
-								<div class="form-group">
-									<label for="exampleFormControlSelect1"><i>Filter by network:</i></label> 
-									<select 
-										class="form-control" id="formNetworkFilterSelect"
-										ng-model="selectedFilterNetwork"
-										ng-init="selectedFilterNetwork=''">
-										<option value="">All</option>
-										<option value="{{network.url}}" ng-repeat="network in networks">{{network.cidr}}</option>
-									</select>
-								</div>
-							</div>
-							<div class="col"></div>
-							<div class="col"></div>
-							<div class="col"></div>
-						</div>
-					</form>
 
 					<!-- Table View -->
 					<br>
 					<table class="table">
 						<thead>
 							<tr>
+								<th scope="col">Id</th>
 								<th scope="col">Address</th>
 								<th scope="col">Title</th>
-								<th scope="col">Network</th>
 								<th scope="col">Description</th>								
 								<th scope="col">Owner</th>								
 								<th scope="col">Action</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-show="selectedFilterNetwork=='' || (selectedFilterNetwork==address.network)" ng-repeat="address in addresses">
-							
-								<td scope="row">{{address.ip}}</td>
+							<tr ng-repeat="address in addresses">
+								<td scope="row">{{address.id}}</td>
+								<td>{{address.ip}}</td>
 								<td>{{address.title}}</td>
-								<!-- <td>{{address.network}}</td>  -->
-								<td>{{ (networks | filter : {'url':address.network})[0].cidr }}</td>
 								<td>{{address.description}}</td>
 								<td>{{address.owner}}</td>								
 								<td>
@@ -98,18 +78,11 @@
 										<input ng-model="inputTitle" type="text" class="form-control" id="inputTitle" required>
 									</div>
 									<div class="form-group">
-										<label for="inlineSelectNetwork">Network</label>
-										<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" ng-model="inlineSelectNetwork" ng-init="inlineSelectNetwork=''" required>
-									        <option value="">Choose...</option>
-									        <option ng-repeat="network in networks" value="{{network.url}}">{{network.cidr}}</option>
-      									</select>
-									</div>
-									<div class="form-group">
 										<label for="inputDescription">Description</label>
 										<textarea ng-model="inputDescription" class="form-control" id="inputDescription" rows="3" class="form-control"></textarea>
 									</div>
 									
-									<button type="submit" class="btn btn-primary" ng-disabled="!createAddressForm.$valid" ng-click="createAddress(inputIp, inputTitle, inputDescription, inlineSelectNetwork)">Create</button>
+									<button type="submit" class="btn btn-primary" ng-disabled="!createAddressForm.$valid" ng-click="createAddress(inputIp, inputTitle, inputDescription, network.url)">Create</button>
 								</form>
 
 							</div>							
@@ -137,14 +110,7 @@
 									<div class="form-group">
 										<label for="inputTitle">Title</label>
 										<input ng-model="addressToUpdate.title" type="text" class="form-control" id="inputTitle" ng-value="addressToUpdate.title" required>
-									</div>
-									<div class="form-group">
-										<label for="inlineSelectNetwork">Network</label>
-										<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" ng-model="addressToUpdate.network" ng-init="inlineSelectNetwork=''" ng-value="addressToUpdate.network" required>
-									        <option value="">Choose...</option>
-									        <option ng-repeat="network in networks" value="{{network.url}}">{{network.cidr}}</option>
-      									</select>
-									</div>									
+									</div>							
 									<div class="form-group">
 										<label for="inputDescription">Description</label>
 										<textarea ng-model="addressToUpdate.description" class="form-control" id="inputDescription" rows="3" class="form-control" ng-value="addressToUpdate.description"></textarea>

@@ -4,21 +4,25 @@ angular.module('myApp.addresses', ['ngRoute'])
 .config(['$routeProvider', function($routeProvider) {
 	
 	$routeProvider
-	.when('/addresses', {
+	.when('/addresses/:networkId', {
 		templateUrl: 'modules/addresses/addresses.html',
 		controller: 'AddressesCtrl'
 	});
 	
 }])
-.controller('AddressesCtrl', ['$rootScope', '$scope', '$http', '$location', '$cookieStore', 'AuthenticationService', function($rootScope, $scope, $http, $location, $cookieStore, AuthenticationService) {
+.controller('AddressesCtrl', ['$rootScope', '$scope', '$http', '$location', '$cookieStore', 'AuthenticationService', '$routeParams', function($rootScope, $scope, $http, $location, $cookieStore, AuthenticationService, $routeParams) {
 	
-	console.log("AddressesCtrl start ...");
+	console.log("AddressesCtrl start (Route params: "+$routeParams.networkId+ ")...");	
 	
 	$scope.addresses = null;
 	$scope.networks = null;
+	$scope.network = null;
+	$scope.networkId = $routeParams.networkId;
 	$scope.ipNote = "For example: if CIDR networks is 192.168.0.0/24, the values can be between 192.168.0.0 to 192.168.0.255";
 	
 	$scope.init = function(){
+		console.log("AddressesCtrl init ...");
+		$scope.getAddressesNetwork();
 		$scope.getAddresses();
 	}
     
@@ -27,40 +31,46 @@ angular.module('myApp.addresses', ['ngRoute'])
 	}
 	
 	/** REST request */
+    $scope.getAddressesNetwork = function(){
+    		
+    		console.log("AddressesCtrl getAddressNetwork ...");
+    	
+    		/** Get network */
+    		$http.get(
+			$rootScope.webServerBaseUrl+'/networks/' + $scope.networkId + '/'								
+		).then(function successCallback(response) {
+			
+			console.log("AddressesCtrl getAddressNetwork success!");
+			console.log(response);
+			$scope.network = response.data		
+			
+		}, function errorCallback(response) {
+			
+			console.log("AddressesCtrl getAddressNetwork failed!");
+			console.log(response);			
+			
+		}).finally(function() {
+			// If needed
+		});		
+	}
+	
+	/** REST request */
     $scope.getAddresses = function(){
     		
-    		console.log("AddressesCtrl getAddresses (networks and address) ...");
-    	
-    		/** Get networks - this will be used to create an adress (to make a relationship)*/
-    		$http.get(
-    			$rootScope.webServerBaseUrl+'/networks/'										
-    		).then(function successCallback(response) {
-    			
-    			console.log("AddressesCtrl getAddresses - get networks success!");
-    			console.log(response);
-    			$scope.networks = response.data.results		
-    			
-    		}, function errorCallback(response) {
-    			
-    			console.log("AddressesCtrl getAddresses - get networks failed!");
-    			console.log(response);			
-    			
-    		}).finally(function() {
-    			// If needed
-    		});		
+    		console.log("AddressesCtrl getAddresses ...");
     	
     		/** Get addresses */
     		$http.get(
-			$rootScope.webServerBaseUrl+'/addresses/'										
+			$rootScope.webServerBaseUrl+'/addresses/?networkId=' + $scope.networkId								
 		).then(function successCallback(response) {
 			
-			console.log("AddressesCtrl getAddresses - get addresses success!");
+			console.log("AddressesCtrl getAddresses success!");
 			console.log(response);
 			$scope.addresses = response.data.results		
 			
 		}, function errorCallback(response) {
 			
-			console.log("AddressesCtrl getAddresses - get addresses failed!");
+			console.log("AddressesCtrl getAddresses failed!");
 			console.log(response);			
 			
 		}).finally(function() {
