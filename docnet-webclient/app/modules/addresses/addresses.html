@@ -1,0 +1,32 @@
+<div class="d-flex" id="wrapper">
+
+	<div ng-include="'modules/home/sidebar.html'"></div>
+	
+	<!-- Page Content -->
+	<div id="page-content-wrapper">
+	
+		<div ng-include="'modules/home/topbar.html'"></div>
+	
+		<div class="container-fluid">
+			
+			<div ng-init="init()">		
+				 
+				<h1>Addresses</h1>
+				
+				<div class="btn-group float-right" role="group">
+	                <button type="button" class="btn btn-primary" data-toggle="modal"><i class="fas fa-plus"></i> Create Address</button>	                
+	            </div>
+
+			</div>
+			
+			<!--[if lt IE 7]>
+			<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+			<![endif]-->	
+		
+		</div>
+	</div>
+	<!-- /#page-content-wrapper -->
+	
+ </div>
+<!-- /#wrapper -->
+
