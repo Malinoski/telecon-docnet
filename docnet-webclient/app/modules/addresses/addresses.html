@@ -52,7 +52,6 @@
 							<tr>
 								<th scope="col">Address</th>
 								<th scope="col">Title</th>
-								<th scope="col">Url</th>
 								<th scope="col">Network</th>
 								<th scope="col">Description</th>								
 								<th scope="col">Owner</th>								
@@ -64,7 +63,6 @@
 							
 								<td scope="row">{{address.ip}}</td>
 								<td>{{address.title}}</td>
-								<td>{{address.url}}</td>
 								<!-- <td>{{address.network}}</td>  -->
 								<td>{{ (networks | filter : {'url':address.network})[0].cidr }}</td>
 								<td>{{address.description}}</td>
@@ -73,7 +71,7 @@
 									<a href="" data-toggle="modal" data-target="#updateAddressModal" ng-click="loadUpdateAddressModal(address)"><i class="fas fa-edit"></i></a>
 									<a href="" ng-click="deleteAddress(address)"><i class='far fa-trash-alt'></i></a>								
 								</td>
-							</tr>						
+							</tr>												
 						</tbody>
 					</table>	
 				</div>
