@@ -78,8 +78,8 @@ angular.module('myApp.networks', ['ngRoute'])
     			console.log("NetworksCtrl createNetwork failed!");
     			console.log(response);
     			
-    			if(response.status==401){ // Unauthorized, but why?
-    				$scope.checkToken();
+    			if(response.status==401){ 
+    				bootbox.alert("Unauthorized!");
     			}else{
     				bootbox.alert("Failed to create the network!" );    				
     			}
@@ -132,7 +132,7 @@ angular.module('myApp.networks', ['ngRoute'])
 			console.log(response);
 			
 			if(response.status==401){ // Unauthorized, but why?
-				$scope.checkToken();
+				bootbox.alert("Unauthorized!");
 			}else{
 				bootbox.alert("Failed to update the network!" );    				
 			}
@@ -167,7 +167,7 @@ angular.module('myApp.networks', ['ngRoute'])
     		    			console.log(response);
     		    			
     		    			if(response.status==401){// Unauthorized, but why?
-    		    				$scope.checkToken();
+    		    				bootbox.alert("Unauthorized!");    		    				
     		    			}else{
     		    				bootbox.alert("Failed to remove the network!");
     		    			}    		    			
@@ -179,34 +179,5 @@ angular.module('myApp.networks', ['ngRoute'])
     		});
     		
     }
-    
-    /** REST request */
-    $scope.checkToken = function(){
-    	
-		console.log("NetworksCtrl checkToken ...");
-		
-		$http.post(
-			$rootScope.webServerBaseUrl+'/',
-			$rootScope.globals.tokenHeaderConfig
-	    ).then(function successCallback(response) {
-			
-	    		console.log("NetworksCtrl checkToken is valid");
-	    		console.log(response);								
-			
-		}, function errorCallback(response) {
-			
-			console.log("NetworksCtrl checkToken is invalid");
-			console.log(response);
-			bootbox.alert("Unauthorized! Your credential is no longer valid, please login again.");
-			
-			AuthenticationService.ClearCredentials();
-			$location.path('/login');
-			
-		}).finally(function() {
-			
-			
-		});	
-		
-    };
     
 }]);

@@ -86,7 +86,7 @@ angular.module('myApp.addresses', ['ngRoute'])
     			console.log("AddressesCtrl createAddress success!");
     			console.log(response);
     			$scope.getAddresses();
-    			bootbox.alert("Address created!");		
+    			bootbox.alert("Address created!");    			
     			
     		}, function errorCallback(response) {
     			
@@ -94,13 +94,13 @@ angular.module('myApp.addresses', ['ngRoute'])
     			console.log(response);
     			
     			if(response.status==401){ // Unauthorized, but why?
-    				$scope.checkToken();
+    				bootbox.alert("Unauthorized!");
     			}else{
-    				bootbox.alert("Failed to create the network!" );    				
+    				bootbox.alert("Failed to create the address!" );    				
     			}
     			
     		}).finally(function() {
-    			$('#createAddressModal').modal('hide');
+    			$('#createAddressModal').modal('hide');    			
     		});	
     }
     
@@ -111,33 +111,5 @@ angular.module('myApp.addresses', ['ngRoute'])
     $scope.deleteAddress = function ($address){
     		console.log("AddressesCtrl deleteAddress ...");
     }
-    
-    /** REST request */
-    $scope.checkToken = function(){
-    	
-		console.log("checkToken ...");
-		
-		$http.post(
-			$rootScope.webServerBaseUrl+'/',
-			$rootScope.globals.tokenHeaderConfig
-	    ).then(function successCallback(response) {
-			
-	    		console.log("checkToken is valid");
-	    		console.log(response);								
-			
-		}, function errorCallback(response) {
-			
-			console.log("checkToken is invalid");
-			console.log(response);
-			bootbox.alert("Unauthorized! Your credential is no longer valid, please login again.");
-			
-			AuthenticationService.ClearCredentials();
-			$location.path('/login');
-			
-		}).finally(function() {
-			
-		});	
-		
-    };
     
 }]);
