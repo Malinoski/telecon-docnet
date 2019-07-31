@@ -16,12 +16,37 @@
 				<div class="btn-group float-right" role="group">
 	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAddressModal" ng-click="loadCreateAddressModal()"><i class="fas fa-plus"></i> Create Address</button>	                
 	            </div>
-	            
+				
 	            <div ng-show="addresses.length==0">
 					<p><i>There are no records</i></p>
 				</div>
 				
 				<div ng-show="addresses.length>0">
+
+					<!-- Filter -->
+					<br>
+					<form>
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="exampleFormControlSelect1"><i>Filter by network:</i></label> 
+									<select 
+										class="form-control" id="formNetworkFilterSelect"
+										ng-model="selectedFilterNetwork"
+										ng-init="selectedFilterNetwork=''">
+										<option value="">All</option>
+										<option value="{{network.url}}" ng-repeat="network in networks">{{network.cidr}}</option>
+									</select>
+								</div>
+							</div>
+							<div class="col"></div>
+							<div class="col"></div>
+							<div class="col"></div>
+						</div>
+					</form>
+
+					<!-- Table View -->
+					<br>
 					<table class="table">
 						<thead>
 							<tr>
@@ -35,11 +60,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="address in addresses">
+							<tr ng-show="selectedFilterNetwork=='' || (selectedFilterNetwork==address.network)" ng-repeat="address in addresses">
+							
 								<td scope="row">{{address.ip}}</td>
 								<td>{{address.title}}</td>
 								<td>{{address.url}}</td>
-								<td>{{address.network}}</td>
+								<!-- <td>{{address.network}}</td>  -->
+								<td>{{ (networks | filter : {'url':address.network})[0].cidr }}</td>
 								<td>{{address.description}}</td>
 								<td>{{address.owner}}</td>								
 								<td>
