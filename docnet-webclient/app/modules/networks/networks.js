@@ -110,7 +110,8 @@ angular.module('myApp.networks', ['ngRoute'])
     		console.log($networkToUpdate);
     		
 		$http.put(
-			$rootScope.webServerBaseUrl+'/networks/'+$networkToUpdate.id+'/', 
+			// $rootScope.webServerBaseUrl+'/networks/'+$networkToUpdate.id+'/',
+			$networkToUpdate.url,
 	    		{
 				cidr: $networkToUpdate.cidr,
 				title: $networkToUpdate.title,
@@ -143,23 +144,15 @@ angular.module('myApp.networks', ['ngRoute'])
     }
     
     /** REST request */
-    $scope.deleteNetwork = function($networkId){
-    		console.log("NetworksCtrl deleteNetwork("+$networkId+") ...");
-    		
-    		
-//    		console.log($rootScope.globals);
-//    		console.log($cookieStore);
-//    		console.log($http.defaults.headers);
-//    		console.log("tokenHeaderConfig:");
-//    		console.log($rootScope.tokenHeaderConfig);
-    		console.log("globals:");
-    		console.log($rootScope.globals);
+    $scope.deleteNetwork = function($network){
+    		console.log("NetworksCtrl deleteNetwork("+$network.id+") ...");
     		
     		bootbox.confirm("Are you sure to delete the network?", function(result){
     			if(result){
     				
     				$http.delete(
-    		    			$rootScope.webServerBaseUrl+'/networks/'+$networkId+'/',
+    		    			// $rootScope.webServerBaseUrl+'/networks/'+$networkId+'/',
+    					$network.url,
     		    			$rootScope.globals.tokenHeaderConfig
     		    	    ).then(function successCallback(response) {
     		    			
