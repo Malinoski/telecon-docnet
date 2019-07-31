@@ -4,7 +4,7 @@
 
 * Create network type as a class, related with network
 
-## Developement
+## Development
 
 * Install Python 3 and PyCharm CE 
 
@@ -16,6 +16,7 @@
 pip install django
 pip install djangorestframework
 pip install django-cors-headers
+pip install django-filter
 pip install pygments
 
 ```
@@ -66,6 +67,8 @@ curl -d "title=Updated the New Network From Commanline" -H "Authorization: Token
 # Add an address for the network (POST)
 curl -d "ip=10.0.0.0/31&description=Description of 10&title=Title of 10&network=http://localhost:8001/networks/1/" -H "Authorization: Token $TOKEN" -X POST http://127.0.0.1:8001/addresses/
   
+# Get a list of address of a network
+curl -H "Authorization: Token $TOKEN" -X GET http://127.0.0.1:8001/addresses/?networkId=36
 ```
 
 * Test from Django REST Unit Tests

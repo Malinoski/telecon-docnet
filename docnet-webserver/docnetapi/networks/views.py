@@ -40,3 +40,14 @@ class AddressView(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+
+        # Optionally restricts the returned purchases to a given network id,
+        # by filtering against a `networkId` query parameter in the URL.
+
+        queryset = Address.objects.all()
+        networkId = self.request.query_params.get('networkId', None)
+        if networkId is not None:
+            queryset = queryset.filter(network=networkId)
+        return queryset

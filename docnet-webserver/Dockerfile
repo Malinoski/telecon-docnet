@@ -17,6 +17,7 @@ RUN pip install -U pip setuptools
 RUN pip install django
 RUN pip install djangorestframework
 RUN pip install django-cors-headers
+RUN pip install django-filter
 RUN pip install pygments
 
 # Include code in container
