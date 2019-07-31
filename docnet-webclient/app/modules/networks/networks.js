@@ -147,7 +147,7 @@ angular.module('myApp.networks', ['ngRoute'])
     $scope.deleteNetwork = function($network){
     		console.log("NetworksCtrl deleteNetwork("+$network.id+") ...");
     		
-    		bootbox.confirm("Are you sure to delete the network?", function(result){
+    		bootbox.confirm("Are you sure to delete?", function(result){
     			if(result){
     				
     				$http.delete(
@@ -166,18 +166,18 @@ angular.module('myApp.networks', ['ngRoute'])
     		    			console.log("NetworksCtrl deleteNetwork failed!");
     		    			console.log(response);
     		    			
-    		    			if(response.status==401){// Unauthorized, but why?
-    		    				bootbox.alert("Unauthorized!");    		    				
+    		    			if(response.status==401){
+    		    				bootbox.alert("Unauthorized!");
+    		    				
     		    			}else{
     		    				bootbox.alert("Failed to remove the network!");
     		    			}    		    			
     		    			
     		    		}).finally(function() {
-    		    			
+    		    			// If need to
     		    		});	
     			}
-    		});
-    		
+    		});    		
     }
     
 }]);

@@ -14,6 +14,8 @@
 
 * [code updgrade] $scope.checkToken must be a service available to all apps
 
+* [feature] Create generic services (to be used for any app) to delete and list, including only the url
+
 ## Development
 
 * Run a simple Angular in node.js

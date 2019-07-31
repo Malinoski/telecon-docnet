@@ -110,6 +110,37 @@ angular.module('myApp.addresses', ['ngRoute'])
     
     $scope.deleteAddress = function ($address){
     		console.log("AddressesCtrl deleteAddress ...");
+    		
+    		bootbox.confirm("Are you sure to delete?", function(result){
+    			if(result){
+    				
+    				$http.delete(
+    					$address.url,
+    		    			$rootScope.globals.tokenHeaderConfig
+    		    	    ).then(function successCallback(response) {
+    		    			
+    		    			console.log("AddressesCtrl deleteAddress success!");
+    		    			console.log(response);
+    		    			$scope.getAddresses();
+    		    			bootbox.alert("Address removed!");		
+    		    			
+    		    		}, function errorCallback(response) {
+    		    			
+    		    			console.log("AddressesCtrl deleteAddress failed!");
+    		    			console.log(response);
+    		    			
+    		    			if(response.status==401){
+    		    				bootbox.alert("Unauthorized!");    		    				
+    		    			}else{
+    		    				bootbox.alert("Failed to remove the address!");
+    		    			}    		    			
+    		    			
+    		    		}).finally(function() {
+    		    			// If need to
+    		    		});	
+    			}
+    		});    		
+    		
     }
     
 }]);
