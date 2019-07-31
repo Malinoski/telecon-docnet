@@ -10,6 +10,8 @@
 
 * [Design] Create a principal header on top of page
 
+* [functionality] When open a create modals, this must cleared
+
 ## Development
 
 * Run a simple Angular in node.js

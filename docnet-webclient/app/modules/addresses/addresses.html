@@ -14,7 +14,7 @@
 				<h1>Addresses</h1>
 				
 				<div class="btn-group float-right" role="group">
-	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAddressModal"><i class="fas fa-plus"></i> Create Address</button>	                
+	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAddressModal" ng-click="loadCreateAddressModal()"><i class="fas fa-plus"></i> Create Address</button>	                
 	            </div>
 	            
 	            <div ng-show="addresses.length==0">
@@ -22,7 +22,7 @@
 				</div>
 				
 				<div ng-show="addresses.length>0">
-					<code>{{addresses}}</code>
+					
 				</div>
 				
 				<!-- Create Address Modal -->
@@ -47,11 +47,18 @@
 										<input ng-model="inputTitle" type="text" class="form-control" id="inputTitle" required>
 									</div>
 									<div class="form-group">
-										<label ng-model="inputDescription" for="inputDescription">Description</label>
-										<textarea class="form-control" id="inputDescription" rows="3"></textarea>
+										<label for="inlineSelectNetwork">Network</label>
+										<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" ng-model="inlineSelectNetwork" ng-init="inlineSelectNetwork=''" required>
+									        <option value="">Choose...</option>
+									        <option ng-repeat="network in networks" value="{{network.id}}">{{network.cidr}}</option>
+      									</select>
+									</div>
+									<div class="form-group">
+										<label for="inputDescription">Description</label>
+										<textarea ng-model="inputDescription" class="form-control" id="inputDescription" rows="3" class="form-control"></textarea>
 									</div>
 									
-									<button type="submit" class="btn btn-primary" ng-disabled="!createAddressForm.$valid" ng-click="createAddress(inputIp, inputTitle, inputDescription, network)">Create</button>
+									<button type="submit" class="btn btn-primary" ng-disabled="!createAddressForm.$valid" ng-click="createAddress(inputIp, inputTitle, inputDescription, inlineSelectNetwork)">Create</button>
 								</form>
 
 							</div>							
