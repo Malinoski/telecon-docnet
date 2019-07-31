@@ -8,9 +8,11 @@
 
 * [tests] Create unit tests, like the samples located in e2e-testes folder
 
-* [Design] Create a principal header on top of page
-
 * [functionality] When open a create modals, this must cleared
+
+* [feature] On first loads/login, the available urls must be collected (i.ex.: "http://localhost:8001/networks/", "http://localhost:8001/addresses/")
+
+* [code updgrade] $scope.checkToken must be a service available to all apps
 
 ## Development
 

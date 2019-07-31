@@ -22,7 +22,31 @@
 				</div>
 				
 				<div ng-show="addresses.length>0">
-					
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">IP</th>
+								<th scope="col">Title</th>
+								<th scope="col">Url</th>
+								<th scope="col">Description</th>								
+								<th scope="col">Owner</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="address in addresses">
+								<td scope="row">{{address.ip}}</td>
+								<td>{{address.title}}</td>
+								<td>{{address.url}}</td>
+								<td>{{address.description}}</td>
+								<td>{{address.owner}}</td>
+								<td>
+									<a href="" data-toggle="modal" data-target="#updateAddressModal" ng-click="loadUpdateAddressModal(address)"><i class="fas fa-edit"></i></a>
+									<a href="" ng-click="deleteAddress(address)"><i class='far fa-trash-alt'></i></a>								
+								</td>
+							</tr>						
+						</tbody>
+					</table>	
 				</div>
 				
 				<!-- Create Address Modal -->
@@ -50,7 +74,7 @@
 										<label for="inlineSelectNetwork">Network</label>
 										<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" ng-model="inlineSelectNetwork" ng-init="inlineSelectNetwork=''" required>
 									        <option value="">Choose...</option>
-									        <option ng-repeat="network in networks" value="{{network.id}}">{{network.cidr}}</option>
+									        <option ng-repeat="network in networks" value="{{network.url}}">{{network.cidr}}</option>
       									</select>
 									</div>
 									<div class="form-group">

@@ -69,9 +69,75 @@ angular.module('myApp.addresses', ['ngRoute'])
 		});		
 	}
     
-    $scope.createAddress = function($inputIp, $inputTitle, $inputDescription, $networkId){
-    		console.log("AddressesCtrl createAddress ("+ $inputIp+", "+$inputTitle+", "+ $inputDescription+", "+ $networkId + ") ...");
+    $scope.createAddress = function($ip, $title, $description, $networkId){
+    		console.log("AddressesCtrl createAddress ("+ $ip+", "+$title+", "+ $description+", "+ $networkId + ") ...");
     		
+    		$http.post(
+    			$rootScope.webServerBaseUrl+'/addresses/', 
+    	    		{
+    				ip: $ip,
+    				title: $title,
+    				description: $description,
+    				network: $networkId
+    	    		},
+    	    		$rootScope.globals.tokenHeaderConfig
+    	    ).then(function successCallback(response) {
+    			
+    			console.log("AddressesCtrl createAddress success!");
+    			console.log(response);
+    			$scope.getAddresses();
+    			bootbox.alert("Address created!");		
+    			
+    		}, function errorCallback(response) {
+    			
+    			console.log("AddressesCtrl createAddress failed!");
+    			console.log(response);
+    			
+    			if(response.status==401){ // Unauthorized, but why?
+    				$scope.checkToken();
+    			}else{
+    				bootbox.alert("Failed to create the network!" );    				
+    			}
+    			
+    		}).finally(function() {
+    			$('#createAddressModal').modal('hide');
+    		});	
     }
+    
+    $scope.loadUpdateAddressModal = function ($address){
+    		console.log("AddressesCtrl loadUpdateAddressModal ...");
+    }
+    
+    $scope.deleteAddress = function ($address){
+    		console.log("AddressesCtrl deleteAddress ...");
+    }
+    
+    /** REST request */
+    $scope.checkToken = function(){
+    	
+		console.log("checkToken ...");
+		
+		$http.post(
+			$rootScope.webServerBaseUrl+'/',
+			$rootScope.globals.tokenHeaderConfig
+	    ).then(function successCallback(response) {
+			
+	    		console.log("checkToken is valid");
+	    		console.log(response);								
+			
+		}, function errorCallback(response) {
+			
+			console.log("checkToken is invalid");
+			console.log(response);
+			bootbox.alert("Unauthorized! Your credential is no longer valid, please login again.");
+			
+			AuthenticationService.ClearCredentials();
+			$location.path('/login');
+			
+		}).finally(function() {
+			
+		});	
+		
+    };
     
 }]);
