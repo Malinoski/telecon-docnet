@@ -29,10 +29,9 @@ angular.module('myApp.addresses', ['ngRoute'])
 	/** REST request */
     $scope.getAddresses = function(){
     		
-    		console.log("AddressesCtrl getAddresses () ...");
+    		console.log("AddressesCtrl getAddresses (networks and address) ...");
     	
-    		console.log("AddressesCtrl getAddresses - get networks ...");
-    		/* Get networks - this will be used to create an adress (to make a relationship)*/
+    		/** Get networks - this will be used to create an adress (to make a relationship)*/
     		$http.get(
     			$rootScope.webServerBaseUrl+'/networks/'										
     		).then(function successCallback(response) {
@@ -50,8 +49,8 @@ angular.module('myApp.addresses', ['ngRoute'])
     			// If needed
     		});		
     	
-    		console.log("AddressesCtrl getAddresses - get addresses ...");	
-		$http.get(
+    		/** Get addresses */
+    		$http.get(
 			$rootScope.webServerBaseUrl+'/addresses/'										
 		).then(function successCallback(response) {
 			
@@ -106,6 +105,55 @@ angular.module('myApp.addresses', ['ngRoute'])
     
     $scope.loadUpdateAddressModal = function ($address){
     		console.log("AddressesCtrl loadUpdateAddressModal ...");
+    		$scope.createAddressForm.$setPristine();
+    		
+    		/**
+    		The code below CANT be used, because it will create a reference, not a copy. If the user alter the fields (input), it will update the principal object.
+    		$scope.addressToUpdate = $address;    			
+    		The proper way is to make a copy:
+    		$scope.addressToUpdate = angular.copy($address);
+    		*/ 
+    		$scope.addressToUpdate = angular.copy($address);
+    }
+    
+    /** REST request */
+    $scope.updateAddress = function($addressToUpdate){
+    	
+    		console.log("AddressesCtrl updateAddress ...");
+    		// console.log($addressToUpdate);
+    		
+		$http.put(
+			// $rootScope.webServerBaseUrl+'/address/'+$addressToUpdate.id+'/',
+			$addressToUpdate.url,
+	    		{
+				ip: $addressToUpdate.ip,
+				title: $addressToUpdate.title,
+				description: $addressToUpdate.description,
+				network: $addressToUpdate.network				
+	    		},
+	    		$rootScope.globals.tokenHeaderConfig
+	    ).then(function successCallback(response) {
+			
+			console.log("AddressesCtrl updateAddress success!");
+			console.log(response);
+			$scope.getAddresses();
+			bootbox.alert("Address updated!");		
+			
+		}, function errorCallback(response) {
+			
+			console.log("AddressesCtrl updateAddress failed!");
+			console.log(response);
+			
+			if(response.status==401){ // Unauthorized, but why?
+				bootbox.alert("Unauthorized!");
+			}else{
+				bootbox.alert("Failed to update the address!" );    				
+			}
+			
+		}).finally(function() {
+			$('#updateAddressModal').modal('hide');
+		});	
+		
     }
     
     $scope.deleteAddress = function ($address){

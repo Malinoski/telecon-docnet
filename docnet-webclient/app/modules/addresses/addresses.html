@@ -25,7 +25,7 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th scope="col">IP</th>
+								<th scope="col">Address</th>
 								<th scope="col">Title</th>
 								<th scope="col">Url</th>
 								<th scope="col">Network</th>
@@ -64,7 +64,7 @@
 							<div class="modal-body">
 								<form name="createAddressForm" class="my-form">
 									<div class="form-group">
-										<label for="inputIp">IP</label>
+										<label for="inputIp">Address</label>
 										<input ng-model="inputIp" type="text" class="form-control" id="inputIp" aria-describedby="ipHelp" required>
 										<small id="ipHelp" class="form-text text-muted">{{ipHelp}}</small>
 									</div>
@@ -85,6 +85,48 @@
 									</div>
 									
 									<button type="submit" class="btn btn-primary" ng-disabled="!createAddressForm.$valid" ng-click="createAddress(inputIp, inputTitle, inputDescription, inlineSelectNetwork)">Create</button>
+								</form>
+
+							</div>							
+						</div>
+					</div>
+				</div>
+				
+				<!-- Edit Address Modal -->
+				<div class="modal fade" id="updateAddressModal" tabindex="-1" role="dialog" aria-labelledby="updateAddressModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="updateAddressModalLabel">Update address</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form name="updateAddresForm" class="my-form">
+									<div class="form-group">
+										<label for="inputIp">Address</label>
+										<input ng-model="addressToUpdate.ip" type="text" class="form-control" id="inputIp" aria-describedby="ipHelp" ng-value="addressToUpdate.ip" required>
+										<small id="ipHelp" class="form-text text-muted">{{ipHelp}}</small>
+									</div>
+									<div class="form-group">
+										<label for="inputTitle">Title</label>
+										<input ng-model="addressToUpdate.title" type="text" class="form-control" id="inputTitle" ng-value="addressToUpdate.title" required>
+									</div>
+									<div class="form-group">
+										<label for="inlineSelectNetwork">Network</label>
+										<select class="custom-select mr-sm-2" id="inlineFormCustomSelect" ng-model="addressToUpdate.network" ng-init="inlineSelectNetwork=''" ng-value="addressToUpdate.network" required>
+									        <option value="">Choose...</option>
+									        <option ng-repeat="network in networks" value="{{network.url}}">{{network.cidr}}</option>
+      									</select>
+									</div>									
+									<div class="form-group">
+										<label for="inputDescription">Description</label>
+										<textarea ng-model="addressToUpdate.description" class="form-control" id="inputDescription" rows="3" class="form-control" ng-value="addressToUpdate.description"></textarea>
+									</div>
+									
+									<!-- !updateNetworkForm.$valid -->
+									<button type="submit" class="btn btn-primary" ng-disabled="updateAddresForm.$pristine" ng-click="updateAddress(addressToUpdate)">Update</button>
 								</form>
 
 							</div>							
