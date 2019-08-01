@@ -1,21 +1,21 @@
-# Install using Docker 
+# Install 
 
-## Get the code
+### Get the code
 ```
 git clone https://github.com/Malinoski/telecon-docnet telecon-docnet
 cd telecon-docnet
 ```
 
-## Deploy the web server 
+### Deploy the web server 
 
 ```
 cd docnet-webserver
 docker-compose up -d 
 ```
 
-http://localhost:8001 (username=admin, password=admin)
+http://localhost:8001
 
-## Deploy the web client
+### Deploy the web client
 
 ```
 cd ..
@@ -23,11 +23,14 @@ cd docnet-webclient
 docker-compose up -d
 ```
 
-http://localhost:8002
+Available users (```$USERNAME:$PASSORD```): 
 
-## Utils
+```admin:admin``` and ```user01:user01```
 
-* Destroy containers and images
+http://localhost:8002 
+
+
+# Uninstall
 
 ```
 docker stop docnet-webserver; docker rm docnet-webserver; docker rmi docnet-webserver_web
