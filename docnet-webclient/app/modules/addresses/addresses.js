@@ -22,8 +22,8 @@ angular.module('myApp.addresses', ['ngRoute'])
 	
 	$scope.init = function(){
 		console.log("AddressesCtrl init ...");
-		$scope.getAddressesNetwork();
-		$scope.getAddresses();
+		$scope.getAddressesFromNetwork();	
+		$scope.getNetworkDetails();
 	}
     
 	$scope.logout = function(){
@@ -31,13 +31,13 @@ angular.module('myApp.addresses', ['ngRoute'])
 	}
 	
 	/** REST request */
-    $scope.getAddressesNetwork = function(){
+    $scope.getNetworkDetails = function(){
     		
     		console.log("AddressesCtrl getAddressNetwork ...");
     	
-    		/** Get network */
     		$http.get(
-			$rootScope.webServerBaseUrl+'/networks/' + $scope.networkId + '/'								
+			$rootScope.webServerBaseUrl+'/networks/' + $scope.networkId + '/'	,
+			$rootScope.globals.tokenHeaderConfig
 		).then(function successCallback(response) {
 			
 			console.log("AddressesCtrl getAddressNetwork success!");
@@ -54,23 +54,25 @@ angular.module('myApp.addresses', ['ngRoute'])
 		});		
 	}
 	
+	
 	/** REST request */
-    $scope.getAddresses = function(){
+    $scope.getAddressesFromNetwork = function(){
     		
-    		console.log("AddressesCtrl getAddresses ...");
+    		console.log("AddressesCtrl getAddressesFromNetwork (networkId="+$scope.networkId+")...");
     	
     		/** Get addresses */
     		$http.get(
-			$rootScope.webServerBaseUrl+'/addresses/?networkId=' + $scope.networkId								
+			$rootScope.webServerBaseUrl+'/addresses/?networkId=' + $scope.networkId,
+			$rootScope.globals.tokenHeaderConfig
 		).then(function successCallback(response) {
 			
-			console.log("AddressesCtrl getAddresses success!");
+			console.log("AddressesCtrl getAddressesFromNetwork success!");
 			console.log(response);
 			$scope.addresses = response.data.results		
 			
 		}, function errorCallback(response) {
 			
-			console.log("AddressesCtrl getAddresses failed!");
+			console.log("AddressesCtrl getAddressesFromNetwork failed!");
 			console.log(response);			
 			
 		}).finally(function() {
@@ -94,7 +96,7 @@ angular.module('myApp.addresses', ['ngRoute'])
     			
     			console.log("AddressesCtrl createAddress success!");
     			console.log(response);
-    			$scope.getAddresses();
+    			$scope.getAddressesFromNetwork();
     			bootbox.alert("Address created!");    			
     			
     		}, function errorCallback(response) {
@@ -130,10 +132,8 @@ angular.module('myApp.addresses', ['ngRoute'])
     $scope.updateAddress = function($addressToUpdate){
     	
     		console.log("AddressesCtrl updateAddress ...");
-    		// console.log($addressToUpdate);
     		
 		$http.put(
-			// $rootScope.webServerBaseUrl+'/address/'+$addressToUpdate.id+'/',
 			$addressToUpdate.url,
 	    		{
 				ip: $addressToUpdate.ip,
@@ -146,7 +146,7 @@ angular.module('myApp.addresses', ['ngRoute'])
 			
 			console.log("AddressesCtrl updateAddress success!");
 			console.log(response);
-			$scope.getAddresses();
+			$scope.getAddressesFromNetwork();
 			bootbox.alert("Address updated!");		
 			
 		}, function errorCallback(response) {
@@ -179,7 +179,7 @@ angular.module('myApp.addresses', ['ngRoute'])
     		    			
     		    			console.log("AddressesCtrl deleteAddress success!");
     		    			console.log(response);
-    		    			$scope.getAddresses();
+    		    			$scope.getAddressesFromNetwork();
     		    			bootbox.alert("Address removed!");		
     		    			
     		    		}, function errorCallback(response) {

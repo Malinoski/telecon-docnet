@@ -42,7 +42,8 @@ class UserView(viewsets.ModelViewSet):
 class AddressView(viewsets.ModelViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -52,8 +53,14 @@ class AddressView(viewsets.ModelViewSet):
         # Optionally restricts the returned purchases to a given network id,
         # by filtering against a `networkId` query parameter in the URL.
 
+        '''
         queryset = Address.objects.all()
         networkId = self.request.query_params.get('networkId', None)
         if networkId is not None:
             queryset = queryset.filter(network=networkId)
         return queryset
+        '''
+
+        networkId = self.request.query_params.get('networkId', None)
+        user = self.request.user
+        return Address.objects.filter(owner=user, network=networkId)

@@ -13,14 +13,13 @@
 				 
 				<h1>Network</h1>
 				<h4><i>Title: {{network.title}}</i></h4>
-				<h4><i>CIDR: {{network.cidr}}</i></h4>
+				<h4><i>CIDR: {{network.cidr}}</i></h4>				
 				
 				<div class="btn-group float-right" role="group">
 	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAddressModal" ng-click="loadCreateAddressModal()"><i class="fas fa-plus"></i> Create Address</button>	                
 	            </div>
 				
-				<br><br><br>
-	            <div ng-show="addresses.length==0">
+				<div ng-show="addresses.length==0">
 					<p><i>There are no adrress</i></p>
 				</div>
 				
