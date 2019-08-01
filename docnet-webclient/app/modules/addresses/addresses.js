@@ -131,7 +131,7 @@ angular.module('myApp.addresses', ['ngRoute'])
     /** REST request */
     $scope.updateAddress = function($addressToUpdate){
     	
-    		console.log("AddressesCtrl updateAddress ...");
+    		console.log("AddressesCtrl updateAddress ("+$addressToUpdate.url+")...");
     		
 		$http.put(
 			$addressToUpdate.url,

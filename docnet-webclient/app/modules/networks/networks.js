@@ -107,11 +107,10 @@ angular.module('myApp.networks', ['ngRoute'])
     
     /** REST request */
     $scope.updateNetwork = function($networkToUpdate){
-    		console.log("NetworksCtrl updateNetwork ... ");
+    		console.log("NetworksCtrl updateNetwork ("+$networkToUpdate.url+") ... ");
     		console.log($networkToUpdate);
     		
 		$http.put(
-			// $rootScope.webServerBaseUrl+'/networks/'+$networkToUpdate.id+'/',
 			$networkToUpdate.url,
 	    		{
 				cidr: $networkToUpdate.cidr,

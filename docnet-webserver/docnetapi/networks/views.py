@@ -64,3 +64,8 @@ class AddressView(viewsets.ModelViewSet):
         networkId = self.request.query_params.get('networkId', None)
         user = self.request.user
         return Address.objects.filter(owner=user, network=networkId)
+
+        '''
+        user = self.request.user
+        return Address.objects.filter(owner=user)
+        '''

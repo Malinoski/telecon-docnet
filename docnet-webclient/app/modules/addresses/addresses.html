@@ -34,7 +34,8 @@
 								<th scope="col">Id</th>
 								<th scope="col">Address</th>
 								<th scope="col">Title</th>
-								<th scope="col">Description</th>								
+								<th scope="col">Description</th>
+								<th scope="col">Network</th>								
 								<th scope="col">Owner</th>								
 								<th scope="col">Action</th>
 							</tr>
@@ -45,6 +46,7 @@
 								<td>{{address.ip}}</td>
 								<td>{{address.title}}</td>
 								<td>{{address.description}}</td>
+								<td>{{address.network}}</td>
 								<td>{{address.owner}}</td>								
 								<td>
 									<a href="" data-toggle="modal" data-target="#updateAddressModal" ng-click="loadUpdateAddressModal(address)"><i class="fas fa-edit"></i></a>
