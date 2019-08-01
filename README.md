@@ -25,7 +25,7 @@ docker-compose up -d
 
 Available users (```$USERNAME:$PASSORD```): 
 
-```admin:admin``` and ```user01:user01```
+```user01:user01``` and ```user02:user02```
 
 http://localhost:8002 
 

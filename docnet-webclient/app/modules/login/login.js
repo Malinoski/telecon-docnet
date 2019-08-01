@@ -66,7 +66,7 @@ angular.module('myApp.login', ['ngRoute'])
     			console.log(response);
     			
     			if(response.status === 400){
-    				loginResponse.message = 'Username or password is incorrect, try "admin" and "admin" =)';
+    				loginResponse.message = 'Username or password is incorrect, try username "user01" and password "user01" =)';
     			} else {
     				loginResponse.message = 'Some problem occurred in REST Web Server =(';
     			} 		

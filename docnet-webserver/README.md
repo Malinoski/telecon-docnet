@@ -34,8 +34,8 @@ django-admin.py startapp [MY_APP]
 python manage.py makemigrations
 python manage.py migrate
 
-# Create the admin
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
+# Create an user
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('user01', 'user01@example.com', 'user01')" | python manage.py shell
 ```
 
 * Run
@@ -49,24 +49,27 @@ python manage.py runserver 8001
 Example 1: 
 
 ```
-http -a admin:admin POST http://127.0.0.1:8001/networks/ title="New network" description="New description"
+http -a user01:user01 POST http://127.0.0.1:8001/networks/ title="New network" description="New description"
 ``` 
    
 Example 2:
 
 ```
 # Get token and save in $TOKEN
-http post http://localhost:8001/api-token-auth/ username=admin password=admin
+http post http://localhost:8001/api-token-auth/ username=user01 password=user01
 
 # Create a network (POST)
 curl -d "title=New Network From Commanline&description2=New description from command line" -H "Authorization: Token $TOKEN" -X POST http://127.0.0.1:8001/networks/
+
+# List networks (GET)
+curl -H "Authorization: Token $TOKEN" -X GET http://localhost:8001/networks/
 
 # Edit a network (PUT)
 curl -d "title=Updated the New Network From Commanline" -H "Authorization: Token $TOKEN" -X PUT http://127.0.0.1:8001/networks/1/
 
 # Add an address for the network (POST)
 curl -d "ip=10.0.0.0/31&description=Description of 10&title=Title of 10&network=http://localhost:8001/networks/1/" -H "Authorization: Token $TOKEN" -X POST http://127.0.0.1:8001/addresses/
-  
+ 
 # Get a list of address of a network
 curl -H "Authorization: Token $TOKEN" -X GET http://127.0.0.1:8001/addresses/?networkId=36
 ```
@@ -85,7 +88,7 @@ python manage.py test
 docker-compose up -d
 # Note: To rebuild this image you must use `docker-compose build` or `docker-compose up --build`.
 # Test (must return a token)
-http post http://localhost:8001/api-token-auth/ username=admin password=admin
+http post http://localhost:8001/api-token-auth/ username=user01 password=user01
 ```
 
 ## Utils
@@ -104,7 +107,7 @@ rm -f db.sqlite3
 rm -r networks/migrations
 python manage.py makemigrations networks
 python manage.py migrate
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | python manage.py shell
 echo "from django.contrib.auth.models import User; User.objects.create_superuser('user01', 'user01@example.com', 'user01')" | python manage.py shell
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('user02', 'user01@example.com', 'user02')" | python manage.py shell
 
 ```
