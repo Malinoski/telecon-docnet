@@ -21,33 +21,31 @@ class NetworkTests(APITestCase):
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
 
     def test_dummy_test(self):
-
-        print("\n\n----------- test_dummy_test ----------- ")
+        print("\ntest_dummy_test")
         self.assertTrue(True)
 
     def test_create_network(self):
-
-        print("\n\n----------- test_create_network ----------- ")
-
+        print("\ntest_create_network")
         data = {
-            "title": "New Network",
-            "description": "A description"
+            "cidr": "10.0.0.0",
+            "title": "My Network",
+            "description": "My Network description"
         }
 
         url = reverse('network-list')
-        # or
+        # or:
         # url = '/networks/'
 
-        # response = self.client.post(reverse('network-list'), data, format='json')
-        response = self.client.post(url, data, format='json')
+        response = self.client.post(reverse('network-list'), data, format='json')
+
+        # print("\n---DEBUG--\n")
+        # print(response.data)
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Network.objects.count(), 1)
 
     def test_create_network_with_no_title(self):
-
-        print("\n\n----------- test_create_network_with_no_title ----------- ")
-
+        print("\ntest_create_network_with_no_title")
         data = {
             "title"
             "description": "A description"
