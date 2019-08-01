@@ -1,0 +1,54 @@
+{
+  "_from": "angular-cookies@1.4.7",
+  "_id": "angular-cookies@1.4.7",
+  "_inBundle": false,
+  "_integrity": "sha1-A8Hq2GzH+AwyLkPtRxBqY8uU2vc=",
+  "_location": "/angular-cookies",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "angular-cookies@1.4.7",
+    "name": "angular-cookies",
+    "escapedName": "angular-cookies",
+    "rawSpec": "1.4.7",
+    "saveSpec": null,
+    "fetchSpec": "1.4.7"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/angular-cookies/-/angular-cookies-1.4.7.tgz",
+  "_shasum": "03c1ead86cc7f80c322e43ed47106a63cb94daf7",
+  "_spec": "angular-cookies@1.4.7",
+  "_where": "/Users/iuri/git/telecon-docnet/docnet-webclient",
+  "author": {
+    "name": "Angular Core Team",
+    "email": "angular-core+npm@google.com"
+  },
+  "bugs": {
+    "url": "https://github.com/angular/angular.js/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "AngularJS module for cookies",
+  "homepage": "http://angularjs.org",
+  "keywords": [
+    "angular",
+    "framework",
+    "browser",
+    "cookies",
+    "client-side"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "name": "angular-cookies",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angular/angular.js.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.4.7"
+}
