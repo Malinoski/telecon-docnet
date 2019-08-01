@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import Network, Address
 from .serializers import NetworkSerializer, UserSerializer, AddressSerializer
-from .permissions import IsOwnerOrReadOnly  # Custom permission, where any one can see, but only the owner can edit
+from .permissions import IsOwnerOrReadOnly, IsOwner  # Custom permissions
 
 
 class HelloView(APIView):
@@ -22,10 +22,16 @@ class HelloView(APIView):
 class NetworkView(viewsets.ModelViewSet):
     queryset = Network.objects.all()
     serializer_class = NetworkSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwner]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    # This rewrites the get function to return elements only from their owner
+    def get_queryset(self):
+        user = self.request.user
+        return Network.objects.filter(owner=user)
 
 
 class UserView(viewsets.ModelViewSet):

@@ -34,7 +34,8 @@ angular.module('myApp.networks', ['ngRoute'])
 		console.log("NetworksCtrl getNetworks ...");
 	
 		$http.get(
-			$rootScope.webServerBaseUrl+'/networks/'										
+			$rootScope.webServerBaseUrl+'/networks/',	
+			$rootScope.globals.tokenHeaderConfig
 		).then(function successCallback(response) {
 			
 			console.log("NetworksCtrl getNetworks success!");
