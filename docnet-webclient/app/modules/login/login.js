@@ -11,7 +11,7 @@ angular.module('myApp.login', ['ngRoute'])
 }])
 .controller('LoginCtrl', [ '$rootScope', '$scope', '$http', '$location', 'AuthenticationService', function($rootScope, $scope, $http, $location, AuthenticationService) {
 	
-	// AuthenticationService.ClearCredentials();
+	AuthenticationService.ClearCredentials();
 	
 	$scope.login = function (username, password) {
 		
