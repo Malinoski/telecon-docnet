@@ -16,6 +16,9 @@
 
 * [feature] Create generic services (to be used for any app) to delete and list, including only the url
 
+* [code updgrade] Include all Javascript and CSS in package.json (for npm intall). There are some not included there, like bootstrap and bootbox 
+
+
 ## Development
 
 * Run a simple Angular in node.js
@@ -25,7 +28,7 @@ git clone --depth=1 https://github.com/angular/angular-seed.git docnet-webclient
 cd docnet-webclient
 npm install
 npm install express --save
-node app.js # here are configured the http port used
+node app.js
 ```
 
 ## Deploy 
