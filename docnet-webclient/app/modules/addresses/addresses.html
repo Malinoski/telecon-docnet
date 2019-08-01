@@ -11,7 +11,7 @@
 			
 			<div ng-init="init()">		
 				 
-				<h1>Network</h1>
+				<h1>Network Detail</h1>
 				<h4><i>Title: {{network.title}}</i></h4>
 				<h4><i>CIDR: {{network.cidr}}</i></h4>				
 				
@@ -72,7 +72,7 @@
 									<div class="form-group">
 										<label for="inputIp">Address</label>
 										<input ng-model="inputIp" type="text" class="form-control" id="inputIp" aria-describedby="ipHelp" required>
-										<small id="ipHelp" class="form-text text-muted">{{ipHelp}}</small>
+										<small id="ipHelp" class="form-text text-muted">{{addressNote}}</small>
 									</div>
 									<div class="form-group">
 										<label for="inputTitle">Title</label>
@@ -106,7 +106,7 @@
 									<div class="form-group">
 										<label for="inputIp">Address</label>
 										<input ng-model="addressToUpdate.ip" type="text" class="form-control" id="inputIp" aria-describedby="ipHelp" ng-value="addressToUpdate.ip" required>
-										<small id="ipHelp" class="form-text text-muted">{{ipHelp}}</small>
+										<small id="ipHelp" class="form-text text-muted">{{addressNote}}</small>
 									</div>
 									<div class="form-group">
 										<label for="inputTitle">Title</label>

@@ -17,8 +17,8 @@ angular.module('myApp.addresses', ['ngRoute'])
 	$scope.addresses = null;
 	$scope.networks = null;
 	$scope.network = null;
-	$scope.networkId = $routeParams.networkId;
-	$scope.ipNote = "For example: if CIDR networks is 192.168.0.0/24, the values can be between 192.168.0.0 to 192.168.0.255";
+	$scope.networkId = $routeParams.networkId;	
+	$scope.addressNote = "For example, in a CIDR 192.168.100.0/22, the value must be an address between 192.168.100.0 and 192.168.103.255";
 	
 	$scope.init = function(){
 		console.log("AddressesCtrl init ...");
