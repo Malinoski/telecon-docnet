@@ -39,7 +39,7 @@ class NetworkView(viewsets.ModelViewSet):
         cidr = self.request.query_params.get('cidr', None)
         user = self.request.user
         if cidr is not None:
-            return Network.objects.filter(owner=user, cidr=cidr).order_by('id')
+            return Network.objects.filter(owner=user, cidr__contains=cidr).order_by('id')
         return Network.objects.filter(owner=user).order_by('id')
 
 
