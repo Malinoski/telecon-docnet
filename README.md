@@ -1,4 +1,4 @@
-#1. Introduction
+# 1. Introduction
 
 DocNet is a system for network documentation. The system are composed by a web server and a web client. 
 The web server was implemented in Python in Django REST Framework.
@@ -12,7 +12,7 @@ The features offered by the system are:
 * Search search an network 
 
 
-#2. Install 
+# 2. Install 
 
 #### Get the code
 ```
@@ -41,7 +41,7 @@ Available users (```$USERNAME:$PASSORD```): ```user01:user01``` and ```user02:us
 
 http://localhost:8002 
 
-#3. How to use
+# 3. How to use
 
 The following 8 steps illustrate how to create, edit, view and remove networks and address. 
 
@@ -69,7 +69,7 @@ _7. Set the desired values:_
 _8. Now you can edit or remove the address on the action icons_
 ![alt text](./documentation-media/09.png)
 
-#3. Uninstall
+# 4. Uninstall
 
 Just destroy the Docker containers
 
