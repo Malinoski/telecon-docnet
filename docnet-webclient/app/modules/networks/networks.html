@@ -14,12 +14,19 @@
 				<h1>Network List</h1>
 				<!-- This is used to fit space with the address page -->
 				<h4>&nbsp;</h4>
-				<h4>&nbsp;</h4>				
-				
+				<h4>&nbsp;</h4>
+
+				<form name="searchNetworkForm" class="form-inline">
+					<div class="form-group mx-sm-3 mb-2">
+						<input ng-model="searchNetwork" type="text" class="form-control" id="inputNetworkSearch" placeholder="Network CIDR">
+					</div>
+					<button type="submit" class="btn btn-primary mb-2" ng-disabled="!searchNetworkForm.$valid" ng-click="getNetworks(searchNetwork)">Search by CIDR</button>					
+				</form>
+
 				<div class="btn-group float-right" role="group">
 	                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createNetworkModal"><i class="fas fa-plus"></i> Create Network</button>	                
-	            </div>				
-				
+	            </div>	            
+	            	
 				<div ng-show="networks.length==0">
 					<i><p>There are no networks</p></i>
 				</div>

@@ -29,12 +29,19 @@ angular.module('myApp.networks', ['ngRoute'])
 	}
 	
 	/** REST request */
-    $scope.getNetworks = function(){
+    $scope.getNetworks = function($cidr){
     	
-		console.log("NetworksCtrl getNetworks ...");
+		console.log("NetworksCtrl getNetworks ("+ $cidr + ")...");
 	
+		var param = null;
+		if($cidr == undefined || $cidr==""){
+			param = "";			
+		}else{
+			param = "?cidr="+$cidr
+		}
+		
 		$http.get(
-			$rootScope.webServerBaseUrl+'/networks/',	
+			$rootScope.webServerBaseUrl+'/networks/'+param,	
 			$rootScope.globals.tokenHeaderConfig
 		).then(function successCallback(response) {
 			

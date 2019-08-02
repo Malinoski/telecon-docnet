@@ -73,8 +73,8 @@ class GetSingleNetworkTest(APITestCase):
         authenticate(self)
 
         # Create some networks
-        self.network01 = Network.objects.create(title='My netwotk 01', description="My description 01", owner=self.user)
-        self.network02 = Network.objects.create(title='My netwotk 02', description="My description 02", owner=self.user)
+        self.network01 = Network.objects.create(title='My netwotk 01', cidr="10.0.0.0", description="My description 01", owner=self.user)
+        self.network02 = Network.objects.create(title='My netwotk 02', cidr="10.0.0.1", description="My description 02", owner=self.user)
 
     def test_get_valid_single_network(self):
 
@@ -101,6 +101,10 @@ class GetSingleNetworkTest(APITestCase):
 
         response = self.client.get(reverse('network-detail', kwargs={'pk': 99}))
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_get_valid_single_network_filter_by_cidr(self):
+        response = self.client.get('/networks/?cidr=' + str(self.network01.cidr));
+        self.assertTrue(response.data['count'], 1)
 
 
 class CreateNewNetworkTest(APITestCase):
