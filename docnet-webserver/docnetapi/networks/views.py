@@ -8,7 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 
 from .models import Network, Address
 from .serializers import NetworkSerializer, UserSerializer, AddressSerializer
-from .permissions import IsOwnerOrReadOnly, IsOwner  # Custom permissions
+from .permissions import IsOwner  # Custom permissions
+
+# Can be useful in future
+# from .permissions import IsOwnerOrReadOnly,
 
 
 class HelloView(APIView):
@@ -22,8 +25,10 @@ class HelloView(APIView):
 class NetworkView(viewsets.ModelViewSet):
     queryset = Network.objects.all()
     serializer_class = NetworkSerializer
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    # Can be useful in future:
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
@@ -42,30 +47,27 @@ class UserView(viewsets.ModelViewSet):
 class AddressView(viewsets.ModelViewSet):
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
-    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     permission_classes = [permissions.IsAuthenticated, IsOwner]
+
+    # Can be useful in future:
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
     def get_queryset(self):
 
-        # Optionally restricts the returned purchases to a given network id,
-        # by filtering against a `networkId` query parameter in the URL.
+        # Check if has the parameter networkId.
+        # Case yes, the filter act, like http://127.0.0.1:8001/addresses/?networkId=10,
+        # case not, the filter is not required, like
+        # edit (PUT http://127.0.0.1:8001/addresses/20/)
+        # delete (DELETE http://127.0.0.1:8001/addresses/20/)
+        # get one (GET http://127.0.0.1:8001/addresses/20/)
+        network_id = self.request.query_params.get('networkId', None)
 
-        '''
-        queryset = Address.objects.all()
-        networkId = self.request.query_params.get('networkId', None)
-        if networkId is not None:
-            queryset = queryset.filter(network=networkId)
-        return queryset
-        '''
-
-        networkId = self.request.query_params.get('networkId', None)
+        # In both cases, any request act only on the address owner
         user = self.request.user
-        return Address.objects.filter(owner=user, network=networkId)
 
-        '''
-        user = self.request.user
+        if network_id is not None:
+            return Address.objects.filter(owner=user, network=network_id)
         return Address.objects.filter(owner=user)
-        '''

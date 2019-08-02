@@ -131,7 +131,8 @@ angular.module('myApp.addresses', ['ngRoute'])
     /** REST request */
     $scope.updateAddress = function($addressToUpdate){
     	
-    		console.log("AddressesCtrl updateAddress ("+$addressToUpdate.url+")...");
+    		console.log("AddressesCtrl updateAddress ()...");
+    		console.log($addressToUpdate);
     		
 		$http.put(
 			$addressToUpdate.url,
@@ -139,7 +140,7 @@ angular.module('myApp.addresses', ['ngRoute'])
 				ip: $addressToUpdate.ip,
 				title: $addressToUpdate.title,
 				description: $addressToUpdate.description,
-				network: $addressToUpdate.network				
+				network: $addressToUpdate.network
 	    		},
 	    		$rootScope.globals.tokenHeaderConfig
 	    ).then(function successCallback(response) {
