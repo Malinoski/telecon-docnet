@@ -43,31 +43,34 @@ http://localhost:8002
 
 # 3. How to use
 
-The following 8 steps illustrate how to create, edit, view and remove networks and address. 
+The following steps illustrates the basic of create networks and addresses. 
 
 _1. Access the web client at http://localhost:8001, and enter with the username ```user01``` and password ```user01```_
-![alt text](./documentation-media/01.png)
+![alt text](./documentation-media/001.png)
 
-_2. You will see an empty list of networks. Lets create on the button "Create Network"_
-![alt text](./documentation-media/02.png)
+_2. Lets create a networks by clicking on button "Create Network"_
+![alt text](./documentation-media/002.png)
 
-_3. Set the desired values:_
-![alt text](./documentation-media/03.png)
+_3. Insert some values for your network:_
+![alt text](./documentation-media/003.png)
 
-_4. Now you can edit or remove the network on the action icons_
-![alt text](./documentation-media/04.png) 
+_4. Now you can edit or remove on the action icons_
+![alt text](./documentation-media/004.png) 
 
 _5. Click on the hyperlink to create a new address:_
-![alt text](./documentation-media/06.png)
+![alt text](./documentation-media/005.png)
 
-_6. Click on the button "Create Address":_
-![alt text](./documentation-media/07.png)
+_6. And click on the button "Create Address":_
+![alt text](./documentation-media/006.png)
 
-_7. Set the desired values:_
-![alt text](./documentation-media/08.png)
+_7. Insert some values for your address_
+![alt text](./documentation-media/007.png)
 
-_8. Now you can edit or remove the address on the action icons_
-![alt text](./documentation-media/09.png)
+_8. Now you can edit or remove on the action icons_
+![alt text](./documentation-media/008.png)
+
+_9. This was the basic on create networks and address
+![alt text](./documentation-media/009.png)
 
 # 4. Uninstall
 
