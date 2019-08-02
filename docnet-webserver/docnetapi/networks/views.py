@@ -36,7 +36,7 @@ class NetworkView(viewsets.ModelViewSet):
     # This rewrites the get function to return elements only from their owner
     def get_queryset(self):
         user = self.request.user
-        return Network.objects.filter(owner=user)
+        return Network.objects.filter(owner=user).order_by('id')
 
 
 class UserView(viewsets.ModelViewSet):

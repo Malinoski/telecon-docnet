@@ -12,7 +12,7 @@
 
 * Create the PyCharm web sever project, using a new environment with Python 3 interpreter (i.e.: /usr/local/Cellar/python/3.7.4/bin/python3)
 
-* Open the PyCharm Terminal and install the dependences:
+* Open the PyCharm Terminal and install the dependencies:
 
 ```
 pip install django
@@ -20,6 +20,7 @@ pip install djangorestframework
 pip install django-cors-headers
 pip install django-filter
 pip install pygments
+pip install django-extensions
 
 ```
 

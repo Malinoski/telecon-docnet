@@ -19,6 +19,7 @@ RUN pip install djangorestframework
 RUN pip install django-cors-headers
 RUN pip install django-filter
 RUN pip install pygments
+RUN pip install django-extensions
 
 # Include code in container
 ADD . /webapps/
