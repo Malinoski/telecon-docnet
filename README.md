@@ -44,28 +44,26 @@ docker stop docnet-webclient; docker rm docnet-webclient; docker rmi docnet-webc
 
 The following 8 steps illustrate how to create, edit, view and remove networks and address. 
 
-1. Access the web client at http://localhost:8001, and enter with the username ```user01``` and password ```user01```
+_1. Access the web client at http://localhost:8001, and enter with the username ```user01``` and password ```user01```_
 ![alt text](./documentation-media/01.png)
 
-2. You will see an empty list of networks. Lets create on the button "Create Network"
+_2. You will see an empty list of networks. Lets create on the button "Create Network"_
 ![alt text](./documentation-media/02.png)
 
-3. Set the desired values:
+_3. Set the desired values:_
 ![alt text](./documentation-media/03.png)
 
-4. Now you can edit or remove the network on the action icons
+_4. Now you can edit or remove the network on the action icons_
 ![alt text](./documentation-media/04.png) 
 
-4. Click on the hyperlink to create a new address:
+_5. Click on the hyperlink to create a new address:_
 ![alt text](./documentation-media/06.png)
 
-5. Click on the button "Create Address":
+_6. Click on the button "Create Address":_
 ![alt text](./documentation-media/07.png)
 
-6. Set the desired values:
+_7. Set the desired values:_
 ![alt text](./documentation-media/08.png)
 
-7. Now you can edit or remove the address on the action icons
+_8. Now you can edit or remove the address on the action icons_
 ![alt text](./documentation-media/09.png)
-
-8
