@@ -4,6 +4,8 @@
 
 * Create network type as a class, related with network
 
+* Configure the list services to paginate properly
+
 ## Development
 
 * Install Python 3 and PyCharm CE 
