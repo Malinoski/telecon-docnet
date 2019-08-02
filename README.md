@@ -3,14 +3,28 @@
 DocNet is a system for network documentation. The system are composed by a web server and a web client. 
 The web server was implemented in Python in Django REST Framework.
 The web client was implemented in AngularJS in Node.js.
-The both deploy was prepared to be launched in Docker containers each, using Dockerfile and docker-compose.
+The both deploy was prepared to be automatically launched in Docker containers each, using Dockerfile and docker-compose.
 
-The features offered by the system are:
-* User authentication through login and password (the web client control it using cookies and Django tokens)
-* Create, read, update and delete a network
-* Create, read, update and delete an address for a network
-* Search search an network 
+The authentication roles are defined as:
+* Only authenticated users can access the system
+* Anyone can see all networks and address
+* Anyone can create networks and address    
+* Only owners can edit or delete their own networks or addresses  
 
+Some good points:
+* User authentication through login and password. This feature is controlled by browser cookies and Django tokens.
+* Users can create, view, edit and delete networks and addresses
+* Users can search for an existing network, considering a criteria
+* Avoid overlapping networks
+* Unit tests for all entities (Network and Address), considering HTTP requests for create, read, update and delete. These tests are executed automatically when the container starts.
+* Automatic deploy for Web Server and for Web Client in containers Docker. 
+
+Some bad point:
+* Do not exist verification of network or address type (like IPv4 or IPv6). The fields are text based only
+* Unit tests on the Web Client (Angular)
+* The overlapping is performed on client side (Angular Web Client). This restriction must be done in server side (Web Server Django) 
+* The web pages do not treat pagination
+* All javascripts and CSS from third parties must be removed from source code. This must be automatically downloaded on the automatic deploy 
 
 # 2. Install 
 
