@@ -103,7 +103,7 @@ class GetSingleNetworkTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_get_valid_single_network_filter_by_cidr(self):
-        response = self.client.get('/networks/?cidr=' + str(self.network01.cidr));
+        response = self.client.get('/networks/?part_cidr=' + str(self.network01.cidr));
         self.assertTrue(response.data['count'], 1)
 
 

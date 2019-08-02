@@ -18,6 +18,8 @@
 
 * [code updgrade] Include all Javascript and CSS in package.json (for npm intall). There are some not included there, like bootstrap and bootbox 
 
+* [feature] The restriction of create networks with the same name must be implement in the server side, not only in the client.
+
 
 ## Development
 

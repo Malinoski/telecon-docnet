@@ -37,7 +37,7 @@ angular.module('myApp.networks', ['ngRoute'])
 		if($cidr == undefined || $cidr==""){
 			param = "";			
 		}else{
-			param = "?cidr="+$cidr
+			param = "?part_cidr="+$cidr
 		}
 		
 		$http.get(
@@ -64,37 +64,63 @@ angular.module('myApp.networks', ['ngRoute'])
     	
     		console.log("NetworksCtrl createNetwork ("+$cidr+", "+$title+", "+$description+", "+$enabled+") ...");
     		
-    		$http.post(
-    			$rootScope.webServerBaseUrl+'/networks/', 
-    	    		{
-    				cidr: $cidr,
-    				title: $title,
-    				description: $description,
-    				enabled: $enabled
-    	    		},
-    	    		$rootScope.globals.tokenHeaderConfig
-    	    ).then(function successCallback(response) {
-    			
-    			console.log("NetworksCtrl createNetwork success!");
-    			
-    			console.log(response);
-    			$scope.getNetworks();
-    			bootbox.alert("Network created!");		
-    			
-    		}, function errorCallback(response) {
-    			
-    			console.log("NetworksCtrl createNetwork failed!");
-    			console.log(response);
-    			
-    			if(response.status==401){ 
-    				bootbox.alert("Unauthorized!");
-    			}else{
-    				bootbox.alert("Failed to create the network!" );    				
-    			}
-    			
-    		}).finally(function() {
-    			$('#createNetworkModal').modal('hide');
-    		});	
+    		$http.get(
+			$rootScope.webServerBaseUrl+'/networks/?cidr='+$cidr,	
+			$rootScope.globals.tokenHeaderConfig
+		).then(function successCallback(response) {
+			
+			console.log("NetworksCtrl createNetwork check for cidr success!");
+			console.log(response);
+				
+			if(response.data.count==0){
+				$http.post(
+		    			$rootScope.webServerBaseUrl+'/networks/', 
+		    	    		{
+		    				cidr: $cidr,
+		    				title: $title,
+		    				description: $description,
+		    				enabled: $enabled
+		    	    		},
+		    	    		$rootScope.globals.tokenHeaderConfig
+		    	    ).then(function successCallback(response) {
+		    			
+		    			console.log("NetworksCtrl createNetwork success!");
+		    			
+		    			console.log(response);
+		    			$scope.getNetworks();
+		    			bootbox.alert("Network created!");		
+		    			
+		    		}, function errorCallback(response) {
+		    			
+		    			console.log("NetworksCtrl createNetwork failed!");
+		    			console.log(response);
+		    			
+		    			if(response.status==401){ 
+		    				bootbox.alert("Unauthorized!");
+		    			}else{
+		    				bootbox.alert("Failed to create the network!" );    				
+		    			}
+		    			
+		    		}).finally(function() {
+		    			$('#createNetworkModal').modal('hide');
+		    		});	
+			}else{
+				bootbox.alert("WARNING! The network cannot be created because already exist. Try another CIDR name." );  	
+			}
+			
+			
+		}, function errorCallback(response) {
+			
+			bootbox.alert("An error occurred." );
+			console.log(response);			
+			
+		}).finally(function() {
+			// If needed
+		});		
+    		
+    		
+    		
+    		
     		
     }
     

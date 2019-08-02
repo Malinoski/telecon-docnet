@@ -36,11 +36,19 @@ class NetworkView(viewsets.ModelViewSet):
     # This rewrites the get function to return elements only from their owner
     def get_queryset(self):
 
+        part_cidr = self.request.query_params.get('part_cidr', None)
         cidr = self.request.query_params.get('cidr', None)
+
+        # Can be useful in future (to restrict users)
         # user = self.request.user
-        if cidr is not None:
+
+        if part_cidr is not None:
+            # Can be useful in future (to restrict users)
             # return Network.objects.filter(owner=user, cidr__contains=cidr).order_by('id')
-            return Network.objects.filter(cidr__contains=cidr).order_by('id')
+            return Network.objects.filter(cidr__contains=part_cidr).order_by('id')
+        if cidr is not None:
+            return Network.objects.filter(cidr=cidr).order_by('id')
+        # Can be useful in future (to restrict users)
         # return Network.objects.filter(owner=user).order_by('id')
         return Network.objects.order_by('id')
 
