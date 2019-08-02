@@ -138,8 +138,10 @@ angular.module('myApp.networks', ['ngRoute'])
 			console.log("NetworksCtrl updateNetwork failed!");
 			console.log(response);
 			
-			if(response.status==401){ // Unauthorized, but why?
+			if(response.status==401){ 
 				bootbox.alert("Unauthorized!");
+			}else if(response.status==403){ 
+				bootbox.alert("You do not have permission to perform this action. Are you the network owner?")
 			}else{
 				bootbox.alert("Failed to update the network!" );    				
 			}
@@ -175,7 +177,8 @@ angular.module('myApp.networks', ['ngRoute'])
     		    			
     		    			if(response.status==401){
     		    				bootbox.alert("Unauthorized!");
-    		    				
+    		    			}else if(response.status==403){ 
+    		    				bootbox.alert("You do not have permission to perform this action. Are you the network owner?")
     		    			}else{
     		    				bootbox.alert("Failed to remove the network!");
     		    			}    		    			

@@ -157,6 +157,8 @@ angular.module('myApp.addresses', ['ngRoute'])
 			
 			if(response.status==401){ // Unauthorized, but why?
 				bootbox.alert("Unauthorized!");
+			}else if(response.status==403){ 
+				bootbox.alert("You do not have permission to perform this action. Are you the address owner?")
 			}else{
 				bootbox.alert("Failed to update the address!" );    				
 			}
@@ -190,6 +192,8 @@ angular.module('myApp.addresses', ['ngRoute'])
     		    			
     		    			if(response.status==401){
     		    				bootbox.alert("Unauthorized!");    		    				
+    		    			}else if(response.status==403){ 
+    		    				bootbox.alert("You do not have permission to perform this action. Are you the address owner?")
     		    			}else{
     		    				bootbox.alert("Failed to remove the address!");
     		    			}    		    			
