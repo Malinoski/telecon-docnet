@@ -79,7 +79,7 @@ class GetSingleNetworkTest(APITestCase):
     def test_get_valid_single_network(self):
 
         # Note: The reverse(..) function below means to get an url like '/networks/1/'
-        response = self.client.get(reverse('network-detail', kwargs={'pk': self.network01.pk}));
+        response = self.client.get(reverse('network-detail', kwargs={'pk': self.network01.pk}))
 
         network = Network.objects.get(pk=self.network01.pk);
         serializer = NetworkSerializer(network, context=get_serializer_context())
@@ -96,7 +96,6 @@ class GetSingleNetworkTest(APITestCase):
 
         # Check if the http request was executed ok
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertTrue(True)
 
     def test_get_invalid_single_network(self):
 
@@ -142,3 +141,64 @@ class CreateNewNetworkTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
 
+class UpdateNetworkTest(APITestCase):
+    """ Test module for updating an existing network record """
+
+    def setUp(self):
+
+        # Create a user and collect the token
+        authenticate(self)
+
+        # Create one network
+        self.network01 = Network.objects.create(title='My netwotk 01', description="My description 01", owner=self.user)
+
+        # Define some data
+        self.valid_update_network_data = {
+            'title': 'My new title',
+            'cidr': 'My new CIDR',
+            'description': 'My new description'
+        }
+        self.invalid_update_network_data = {
+            'title': 'My new title',
+            #'cidr': 'My new CIDR',
+            'description': 'My new description'
+        }
+
+    def test_valid_update_network(self):
+        response = self.client.put(
+            reverse('network-detail', kwargs={'pk': self.network01.pk}),
+            data=json.dumps(self.valid_update_network_data),
+            content_type='application/json')
+
+        # print("\n------ MY DEBUG test_valid_update_network");
+        # print(response.data)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_invalid_update_netowrk(self):
+        response = self.client.put(
+            reverse('network-detail', kwargs={'pk': self.network01.pk}),
+            data=json.dumps(self.invalid_update_network_data),
+            content_type='application/json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+
+class DeleteNetworkTest(APITestCase):
+    """ Test module for deleting an existing network record """
+
+    def setUp(self):
+
+        # Create a user and collect the token
+        authenticate(self)
+
+        # Create some networks
+        self.network01 = Network.objects.create(title='My network 01', description="My description 01", owner=self.user)
+        self.network02 = Network.objects.create(title='My network 02', description="My description 02", owner=self.user)
+
+    def test_valid_delete_network(self):
+        response = self.client.delete(reverse('network-detail', kwargs={'pk': self.network01.pk}))
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_invalid_delete_network(self):
+        response = self.client.delete(reverse('network-detail', kwargs={'pk': 99}))
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)

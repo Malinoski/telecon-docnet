@@ -69,5 +69,5 @@ class AddressView(viewsets.ModelViewSet):
         user = self.request.user
 
         if network_id is not None:
-            return Address.objects.filter(owner=user, network=network_id)
-        return Address.objects.filter(owner=user)
+            return Address.objects.filter(owner=user, network=network_id).order_by('id')
+        return Address.objects.filter(owner=user).order_by('id')
