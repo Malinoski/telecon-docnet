@@ -59,7 +59,7 @@ http://localhost:8002
 
 The following steps illustrates the basic of create networks and addresses. 
 
-_1. Access the web client at http://localhost:8001, and enter with the username ```user01``` and password ```user01```_
+_1. Access the web client at http://localhost:8002, and enter with the username ```user01``` and password ```user01```_
 ![alt text](./documentation-media/001.png)
 
 _2. Lets create a networks by clicking on button "Create Network"_
