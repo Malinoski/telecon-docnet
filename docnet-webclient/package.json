@@ -11,7 +11,7 @@
     "angular-loader": "^1.7.5",
     "angular-route": "^1.7.5",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "html5-boilerplate": "0.0.1"
   },
   "devDependencies": {
